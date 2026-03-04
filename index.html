@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pulse — Your Pulse on Every Deal | AI Sales Pulse</title>
+  <meta name="description" content="AI-Powered Sales Assistant for Busy Teams. Never miss a follow-up. Close more sales with Pulse." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%2306b6d4'/%3E%3Cstop offset='100%25' stop-color='%230EA5E9'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='14' fill='url(%23g)' opacity='0.9'/%3E%3C/svg%3E" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: { light: '#06b6d4', DEFAULT: '#0EA5E9', dark: '#0284c7' },
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    /* Heartbeat pulse — ba-dum... ba-dum... (~70 BPM) */
+    /* Fixed organic blob shape — no morphing, just scale */
+    @keyframes heartbeat {
+      0%, 36%, 100% { transform: scale(1); }
+      8%   { transform: scale(1.14); }
+      16%  { transform: scale(0.97); }
+      24%  { transform: scale(1.08); }
+    }
+    @keyframes heartbeat-glow {
+      0%, 36%, 100% { transform: scale(1);    box-shadow: 0 10px 15px -3px rgba(6,182,212,0.3); }
+      8%            { transform: scale(1.18); box-shadow: 0 0 24px 6px rgba(14,165,233,0.35); }
+      16%           { transform: scale(0.97); box-shadow: 0 10px 15px -3px rgba(6,182,212,0.2); }
+      24%           { transform: scale(1.10); box-shadow: 0 0 16px 4px rgba(14,165,233,0.25); }
+    }
+    .blob, .blob-2 { border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%; animation: heartbeat 0.9s ease-in-out infinite; }
+    .blob-2 { animation-delay: 0.12s; }
+    .pulse-glow { border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%; animation: heartbeat-glow 0.9s ease-in-out infinite; }
+
+    /* Scroll animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.35s; }
+
+    /* Floating dashboard */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+    .float { animation: float 5s ease-in-out infinite; }
+
+    /* Pulse ring on CTA — synced to heartbeat rhythm */
+    @keyframes pulse-ring {
+      0%, 36%, 100% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0); }
+      8% { box-shadow: 0 0 0 8px rgba(14, 165, 233, 0.3); }
+      16% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0); }
+      24% { box-shadow: 0 0 0 5px rgba(14, 165, 233, 0.2); }
+    }
+    .pulse-ring { animation: pulse-ring 0.9s ease-in-out infinite; }
+
+    /* Gradient text */
+    .gradient-text {
+      background: linear-gradient(135deg, #0EA5E9, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Nav blur */
+    .nav-blur {
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+    }
+
+    /* Screenshot card hover */
+    .screenshot-card {
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+    }
+    .screenshot-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 25px 60px -12px rgba(14, 165, 233, 0.25);
+    }
+
+    /* Step connector line */
+    .step-line {
+      background: linear-gradient(90deg, #0EA5E9, #06b6d4);
+    }
+
+    /* Smooth scrollbar */
+    html { scroll-behavior: smooth; }
+
+    /* Demo slideshow - all transitions controlled by JS inline styles */
+
+    /* Mobile menu transition */
+    .mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    .mobile-menu.open {
+      max-height: 400px;
+    }
+  </style>
+</head>
+<body class="font-sans text-gray-900 antialiased bg-white overflow-x-hidden">
+
+  <!-- ═══════════════════ NAVBAR ═══════════════════ -->
+  <nav class="fixed top-0 left-0 right-0 z-50 nav-blur bg-white/80 border-b border-gray-100/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-2 group">
+          <div class="w-8 h-8 bg-gradient-to-br from-[#0EA5E9] to-[#06b6d4] pulse-glow"></div>
+          <span class="text-xl font-bold tracking-tight text-gray-900">PULSE</span>
+        </a>
+
+        <!-- Desktop nav -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#features" class="text-sm font-medium text-gray-600 hover:text-brand transition-colors">Features</a>
+          <a href="#how-it-works" class="text-sm font-medium text-gray-600 hover:text-brand transition-colors">How It Works</a>
+          <a href="#screenshots" class="text-sm font-medium text-gray-600 hover:text-brand transition-colors">See It Live</a>
+          <a href="https://app.aisalespulse.com" class="text-sm font-medium text-gray-600 hover:text-brand transition-colors">Login</a>
+          <a href="https://app.aisalespulse.com" class="inline-flex items-center px-5 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-[#0EA5E9] to-[#06b6d4] rounded-full hover:shadow-lg hover:shadow-cyan-500/30 hover:-translate-y-0.5 transition-all duration-200">
+            Get Started
+          </a>
+        </div>
+
+        <!-- Mobile hamburger -->
+        <button id="menu-toggle" class="md:hidden p-2.5 rounded-lg hover:bg-gray-100 transition-colors" aria-label="Toggle menu">
+          <svg id="menu-icon" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg id="close-icon" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="mobile-menu md:hidden">
+        <div class="py-4 space-y-2 border-t border-gray-100">
+          <a href="#features" class="block px-3 py-3 text-sm font-medium text-gray-600 hover:text-brand hover:bg-gray-50 rounded-lg transition-colors mobile-link">Features</a>
+          <a href="#how-it-works" class="block px-3 py-3 text-sm font-medium text-gray-600 hover:text-brand hover:bg-gray-50 rounded-lg transition-colors mobile-link">How It Works</a>
+          <a href="#screenshots" class="block px-3 py-3 text-sm font-medium text-gray-600 hover:text-brand hover:bg-gray-50 rounded-lg transition-colors mobile-link">See It Live</a>
+          <a href="https://app.aisalespulse.com" class="block px-3 py-3 text-sm font-medium text-gray-600 hover:text-brand hover:bg-gray-50 rounded-lg transition-colors">Login</a>
+          <a href="https://app.aisalespulse.com" class="block mx-3 mt-2 px-5 py-3 text-sm font-semibold text-white text-center bg-gradient-to-r from-[#0EA5E9] to-[#06b6d4] rounded-full">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════ HERO ═══════════════════ -->
+  <section class="relative min-h-screen flex items-center pt-16 overflow-hidden">
+    <!-- Background gradient -->
+    <div class="absolute inset-0 bg-gradient-to-br from-slate-50 via-cyan-50/40 to-white"></div>
+
+    <!-- Animated blobs -->
+    <div class="absolute top-20 left-10 w-48 h-48 sm:w-72 sm:h-72 bg-gradient-to-br from-[#0EA5E9]/20 to-[#06b6d4]/10 blob blur-3xl"></div>
+    <div class="absolute bottom-20 right-10 w-64 h-64 sm:w-96 sm:h-96 bg-gradient-to-br from-[#06b6d4]/15 to-[#0EA5E9]/10 blob-2 blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 sm:w-[500px] sm:h-[500px] bg-gradient-to-br from-[#0EA5E9]/5 to-[#06b6d4]/5 blob blur-3xl"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 w-full">
+      <div class="grid grid-cols-[minmax(0,1fr)] lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <!-- Left: Copy -->
+        <div class="text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-cyan-50 border border-cyan-200/60 rounded-full mb-6 reveal">
+            <div class="w-2 h-2 bg-[#0EA5E9] rounded-full animate-pulse"></div>
+            <span class="text-xs font-semibold text-cyan-700 tracking-wide uppercase">AI-Powered Sales Assistant</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight leading-[1.1] mb-6 reveal reveal-delay-1">
+            YOUR PULSE ON
+            <span class="gradient-text">EVERY DEAL</span>
+          </h1>
+
+          <p class="text-lg sm:text-xl text-gray-600 leading-relaxed mb-4 max-w-xl mx-auto lg:mx-0 reveal reveal-delay-2">
+            Never Miss a Follow-Up. Close More Sales.
+          </p>
+          <p class="text-base text-gray-500 mb-8 max-w-lg mx-auto lg:mx-0 reveal reveal-delay-2">
+            AI-Powered Sales Assistant for Busy Teams
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start reveal reveal-delay-3">
+            <a href="https://app.aisalespulse.com" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-gradient-to-r from-[#0EA5E9] to-[#06b6d4] rounded-full hover:shadow-xl hover:shadow-cyan-500/30 hover:-translate-y-0.5 transition-all duration-300 pulse-ring">
+              Get Started
+              <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+            </a>
+            <a href="#screenshots" class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-gray-700 bg-white border-2 border-gray-200 rounded-full hover:border-cyan-300 hover:text-brand hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+              <svg class="mr-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              Watch Demo
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Dashboard mockup -->
+        <div class="relative reveal reveal-delay-3">
+          <div class="float">
+            <div class="relative bg-white rounded-2xl shadow-2xl shadow-gray-900/10 border border-gray-200/60 overflow-hidden">
+              <!-- Mock browser bar -->
+              <div class="flex items-center gap-2 px-4 py-3 bg-gray-50 border-b border-gray-100">
+                <div class="flex gap-1.5">
+                  <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                  <div class="w-3 h-3 rounded-full bg-amber-400"></div>
+                  <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                </div>
+                <div class="flex-1 mx-4">
+                  <div class="bg-white rounded-md px-3 py-1 text-xs text-gray-400 border border-gray-200 text-center">app.aisalespulse.com</div>
+                </div>
+              </div>
+              <!-- Dashboard content -->
+              <div class="p-6 bg-gradient-to-br from-slate-50 to-white">
+                <!-- Stats row -->
+                <div class="grid grid-cols-3 gap-3 mb-4">
+                  <div class="bg-white rounded-xl p-3 border border-gray-100 shadow-sm">
+                    <p class="text-xs text-gray-500 mb-1">Active Deals</p>
+                    <p class="text-xl font-bold text-gray-900">247</p>
+                    <p class="text-xs text-green-500 font-medium mt-1">+12%</p>
+                  </div>
+                  <div class="bg-white rounded-xl p-3 border border-gray-100 shadow-sm">
+                    <p class="text-xs text-gray-500 mb-1">Follow-ups</p>
+                    <p class="text-xl font-bold text-gray-900">38</p>
+                    <p class="text-xs text-[#0EA5E9] font-medium mt-1">Due today</p>
+                  </div>
+                  <div class="bg-white rounded-xl p-3 border border-gray-100 shadow-sm">
+                    <p class="text-xs text-gray-500 mb-1">Won This Month</p>
+                    <p class="text-xl font-bold text-gray-900">$182K</p>
+                    <p class="text-xs text-green-500 font-medium mt-1">+23%</p>
+                  </div>
+                </div>
+                <!-- Alert cards -->
+                <div class="space-y-2">
+                  <div class="flex items-center gap-3 bg-white rounded-lg p-3 border border-gray-100 shadow-sm">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-red-400 flex items-center justify-center text-white text-sm">!</div>
+                    <div class="flex-1 min-w-0">
+                      <p class="text-sm font-semibold text-gray-800 truncate">Acme Corp needs follow-up</p>
+                      <p class="text-xs text-gray-500">Last contact 5 days ago</p>
+                    </div>
+                    <span class="px-2 py-1 text-xs font-medium bg-orange-100 text-orange-700 rounded-full">Urgent</span>
+                  </div>
+                  <div class="flex items-center gap-3 bg-white rounded-lg p-3 border border-gray-100 shadow-sm">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#0EA5E9] to-[#06b6d4] flex items-center justify-center text-white text-sm">AI</div>
+                    <div class="flex-1 min-w-0">
+                      <p class="text-sm font-semibold text-gray-800 truncate">Reorder opportunity detected</p>
+                      <p class="text-xs text-gray-500">Beta Industries — $24K potential</p>
+                    </div>
+                    <span class="px-2 py-1 text-xs font-medium bg-cyan-100 text-cyan-700 rounded-full">AI Alert</span>
+                  </div>
+                  <div class="flex items-center gap-3 bg-white rounded-lg p-3 border border-gray-100 shadow-sm">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center text-white text-sm">✓</div>
+                    <div class="flex-1 min-w-0">
+                      <p class="text-sm font-semibold text-gray-800 truncate">Deal closed — TechStart Inc</p>
+                      <p class="text-xs text-gray-500">$18,500 — Annual contract</p>
+                    </div>
+                    <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-700 rounded-full">Won</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Decorative elements -->
+          <div class="absolute -z-10 -top-4 -right-4 w-full h-full bg-gradient-to-br from-[#0EA5E9]/10 to-[#06b6d4]/10 rounded-2xl blur-sm"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 reveal reveal-delay-4">
+      <span class="text-xs text-gray-400 font-medium">Scroll to explore</span>
+      <div class="w-6 h-10 border-2 border-gray-300 rounded-full flex items-start justify-center p-1">
+        <div class="w-1.5 h-3 bg-gray-400 rounded-full animate-bounce"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ PROBLEM STATEMENT ═══════════════════ -->
+  <section class="py-20 sm:py-28 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-12 reveal">
+        Sales Shouldn't Be <span class="gradient-text">This Hard</span>
+      </h2>
+
+      <div class="grid sm:grid-cols-2 gap-4 sm:gap-6 max-w-2xl mx-auto mb-12">
+        <div class="flex items-start gap-3 text-left p-4 bg-red-50/60 rounded-xl border border-red-100/60 reveal reveal-delay-1">
+          <span class="text-red-400 text-lg mt-0.5">&#10060;</span>
+          <p class="text-gray-700 font-medium">Customers falling through the cracks</p>
+        </div>
+        <div class="flex items-start gap-3 text-left p-4 bg-red-50/60 rounded-xl border border-red-100/60 reveal reveal-delay-1">
+          <span class="text-red-400 text-lg mt-0.5">&#10060;</span>
+          <p class="text-gray-700 font-medium">Buried in WhatsApp and email threads</p>
+        </div>
+        <div class="flex items-start gap-3 text-left p-4 bg-red-50/60 rounded-xl border border-red-100/60 reveal reveal-delay-2">
+          <span class="text-red-400 text-lg mt-0.5">&#10060;</span>
+          <p class="text-gray-700 font-medium">Lost track of who needs follow-up</p>
+        </div>
+        <div class="flex items-start gap-3 text-left p-4 bg-red-50/60 rounded-xl border border-red-100/60 reveal reveal-delay-2">
+          <span class="text-red-400 text-lg mt-0.5">&#10060;</span>
+          <p class="text-gray-700 font-medium">Missing reorder opportunities</p>
+        </div>
+      </div>
+
+      <p class="text-lg text-gray-500 mb-2 reveal reveal-delay-3">Sound familiar?</p>
+      <p class="text-2xl sm:text-3xl font-bold gradient-text reveal reveal-delay-3">There's a better way.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FEATURES ═══════════════════ -->
+  <section id="features" class="py-20 sm:py-28 bg-gradient-to-b from-slate-50 to-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 reveal">
+          Everything You Need to <span class="gradient-text">Sell More</span>
+        </h2>
+        <p class="text-lg text-gray-500 max-w-2xl mx-auto reveal reveal-delay-1">Powerful features that work together to help your team close deals faster.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-5 md:gap-8">
+        <!-- Feature 1 -->
+        <div class="group relative bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-cyan-500/10 hover:border-cyan-200/60 transition-all duration-300 reveal reveal-delay-1">
+          <div class="w-14 h-14 bg-gradient-to-br from-[#0EA5E9] to-[#06b6d4] rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-lg shadow-cyan-500/20 group-hover:scale-110 transition-transform duration-300">
+            🎯
+          </div>
+          <h3 class="text-xl font-bold mb-3">Smart Alerts</h3>
+          <p class="text-gray-600 leading-relaxed">Get instant notifications when customers need attention. No more guessing, no more spreadsheets.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="group relative bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-cyan-500/10 hover:border-cyan-200/60 transition-all duration-300 reveal reveal-delay-2">
+          <div class="w-14 h-14 bg-gradient-to-br from-[#0EA5E9] to-[#06b6d4] rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-lg shadow-cyan-500/20 group-hover:scale-110 transition-transform duration-300">
+            🤖
+          </div>
+          <h3 class="text-xl font-bold mb-3">AI Assistant</h3>
+          <p class="text-gray-600 leading-relaxed">AI drafts personalized follow-up messages, detects opportunities, and helps you close faster.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="group relative bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-cyan-500/10 hover:border-cyan-200/60 transition-all duration-300 reveal reveal-delay-3">
+          <div class="w-14 h-14 bg-gradient-to-br from-[#0EA5E9] to-[#06b6d4] rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-lg shadow-cyan-500/20 group-hover:scale-110 transition-transform duration-300">
+            📊
+          </div>
+          <h3 class="text-xl font-bold mb-3">Never Miss Anything</h3>
+          <p class="text-gray-600 leading-relaxed">All your WhatsApp, email, and calls in one place. Complete visibility, zero friction.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ HOW IT WORKS ═══════════════════ -->
+  <section id="how-it-works" class="py-20 sm:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 reveal">
+          Get Started in <span class="gradient-text">Minutes</span>
+        </h2>
+        <p class="text-lg text-gray-500 max-w-2xl mx-auto reveal reveal-delay-1">Three simple steps to transform how your team sells.</p>
+      </div>
+
+      <div class="relative grid md:grid-cols-3 gap-5 md:gap-8 lg:gap-12">
+        <!-- Connector lines (desktop) -->
+        <div class="hidden md:block absolute top-16 left-[calc(16.66%+2rem)] right-[calc(16.66%+2rem)] h-0.5 step-line opacity-30 reveal"></div>
+
+        <!-- Step 1 -->
+        <div class="text-center reveal reveal-delay-1">
+          <div class="relative inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#0EA5E9] to-[#06b6d4] rounded-2xl text-3xl mb-6 shadow-lg shadow-cyan-500/20">
+            🔌
+            <span class="absolute -top-2 -right-2 w-7 h-7 bg-white border-2 border-[#0EA5E9] rounded-full flex items-center justify-center text-xs font-bold text-[#0EA5E9]">1</span>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Connect Your Tools</h3>
+          <p class="text-gray-600">Link WhatsApp, Email, and CRM in 2 minutes. We handle the rest.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="text-center reveal reveal-delay-2">
+          <div class="relative inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#0EA5E9] to-[#06b6d4] rounded-2xl text-3xl mb-6 shadow-lg shadow-cyan-500/20">
+            📊
+            <span class="absolute -top-2 -right-2 w-7 h-7 bg-white border-2 border-[#0EA5E9] rounded-full flex items-center justify-center text-xs font-bold text-[#0EA5E9]">2</span>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Pulse Learns Your Business</h3>
+          <p class="text-gray-600">AI analyzes your customers, finds patterns, and builds your playbook automatically.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="text-center reveal reveal-delay-3">
+          <div class="relative inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#0EA5E9] to-[#06b6d4] rounded-2xl text-3xl mb-6 shadow-lg shadow-cyan-500/20">
+            🚀
+            <span class="absolute -top-2 -right-2 w-7 h-7 bg-white border-2 border-[#0EA5E9] rounded-full flex items-center justify-center text-xs font-bold text-[#0EA5E9]">3</span>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Start Selling Smarter</h3>
+          <p class="text-gray-600">Get smart alerts, AI-drafted messages, and never let a deal slip through the cracks.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ INTERACTIVE DEMO ═══════════════════ -->
+  <section id="screenshots" class="py-20 sm:py-28 bg-gradient-to-b from-slate-50 to-white overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 reveal">
+          See Pulse <span class="gradient-text">in Action</span>
+        </h2>
+        <p class="text-lg text-gray-500 max-w-2xl mx-auto reveal reveal-delay-1">Beautiful, intuitive, and packed with power.</p>
+      </div>
+
+      <!-- Demo Showcase -->
+      <div class="max-w-4xl mx-auto reveal reveal-delay-2">
+        <div class="relative">
+          <!-- Browser chrome wrapper -->
+          <div class="bg-white rounded-2xl shadow-2xl shadow-gray-900/10 border border-gray-200/60 overflow-hidden">
+            <!-- Browser bar -->
+            <div class="flex items-center gap-2 px-4 sm:px-6 py-3 bg-gray-50 border-b border-gray-100">
+              <div class="flex gap-1.5">
+                <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                <div class="w-3 h-3 rounded-full bg-amber-400"></div>
+                <div class="w-3 h-3 rounded-full bg-green-400"></div>
+              </div>
+              <div class="flex-1 mx-4">
+                <div class="bg-white rounded-md px-3 py-1 text-xs text-gray-400 border border-gray-200 text-center max-w-xs mx-auto">app.aisalespulse.com</div>
+              </div>
+            </div>
+
+            <!-- Slide container -->
+            <div class="relative overflow-hidden min-h-[300px] sm:min-h-[380px]">
+              <!-- Progress bar -->
+              <div class="absolute top-0 left-0 right-0 z-10 h-0.5 bg-gray-100">
+                <div id="demo-progress" class="h-full bg-gradient-to-r from-[#0EA5E9] to-[#06b6d4] transition-none" style="width: 0%"></div>
+              </div>
+
+              <!-- Slide 1: Dashboard -->
+              <div class="demo-slide absolute inset-0 p-4 sm:p-8 bg-gradient-to-br from-slate-50 to-white" data-index="0">
+                <div class="grid grid-cols-3 gap-2 sm:gap-3 mb-5">
+                  <div class="bg-white rounded-xl p-3 sm:p-4 border border-gray-100 shadow-sm">
+                    <p class="text-xs text-gray-500 mb-1">Active Deals</p>
+                    <p class="text-xl sm:text-2xl font-bold text-gray-900">247</p>
+                    <p class="text-xs text-green-500 font-medium mt-1">+12% this week</p>
+                  </div>
+                  <div class="bg-white rounded-xl p-3 sm:p-4 border border-gray-100 shadow-sm">
+                    <p class="text-xs text-gray-500 mb-1">Follow-ups Due</p>
+                    <p class="text-xl sm:text-2xl font-bold text-[#0EA5E9]">38</p>
+                    <p class="text-xs text-orange-500 font-medium mt-1">12 urgent today</p>
+                  </div>
+                  <div class="bg-white rounded-xl p-3 sm:p-4 border border-gray-100 shadow-sm">
+                    <p class="text-xs text-gray-500 mb-1">Won This Month</p>
+                    <p class="text-xl sm:text-2xl font-bold text-gray-900">$182K</p>
+                    <p class="text-xs text-green-500 font-medium mt-1">+23% vs last</p>
+                  </div>
+                </div>
+                <div class="space-y-2.5">
+                  <div class="flex items-center gap-3 bg-white rounded-xl p-3 sm:p-4 border border-gray-100 shadow-sm">
+                    <div class="w-9 h-9 rounded-full bg-gradient-to-br from-orange-400 to-red-400 flex items-center justify-center text-white text-sm font-bold shrink-0">!</div>
+                    <div class="flex-1 min-w-0"><p class="text-sm font-semibold text-gray-800 truncate">Acme Corp needs follow-up</p><p class="text-xs text-gray-500">Last contact 5 days ago — $45K at risk</p></div>
+                    <span class="hidden sm:inline px-2.5 py-1 text-xs font-medium bg-orange-100 text-orange-700 rounded-full shrink-0">Urgent</span>
+                  </div>
+                  <div class="flex items-center gap-3 bg-white rounded-xl p-3 sm:p-4 border border-gray-100 shadow-sm">
+                    <div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#0EA5E9] to-[#06b6d4] flex items-center justify-center text-white text-xs font-bold shrink-0">AI</div>
+                    <div class="flex-1 min-w-0"><p class="text-sm font-semibold text-gray-800 truncate">Reorder opportunity detected</p><p class="text-xs text-gray-500">Beta Industries — $24K potential revenue</p></div>
+                    <span class="hidden sm:inline px-2.5 py-1 text-xs font-medium bg-cyan-100 text-cyan-700 rounded-full shrink-0">AI Alert</span>
+                  </div>
+                  <div class="flex items-center gap-3 bg-white rounded-xl p-3 sm:p-4 border border-gray-100 shadow-sm">
+                    <div class="w-9 h-9 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center text-white text-sm shrink-0">&#10003;</div>
+                    <div class="flex-1 min-w-0"><p class="text-sm font-semibold text-gray-800 truncate">Deal closed — TechStart Inc</p><p class="text-xs text-gray-500">$18,500 — Annual contract signed</p></div>
+                    <span class="hidden sm:inline px-2.5 py-1 text-xs font-medium bg-green-100 text-green-700 rounded-full shrink-0">Won</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 2: AI Chatbot -->
+              <div class="demo-slide absolute inset-0 p-4 sm:p-8 bg-gradient-to-br from-slate-50 to-white" data-index="1">
+                <div class="max-w-lg mx-auto space-y-3">
+                  <div class="flex justify-end"><div class="bg-gradient-to-r from-[#0EA5E9] to-[#06b6d4] text-white text-sm rounded-2xl rounded-tr-md px-4 py-2.5 max-w-[80%] shadow-sm">Draft a follow-up for Acme Corp about their Q2 expansion</div></div>
+                  <div class="flex justify-start">
+                    <div class="bg-white border border-gray-200 text-sm rounded-2xl rounded-tl-md px-4 py-3 max-w-[85%] text-gray-700 shadow-sm">
+                      <div class="flex items-center gap-1.5 mb-2"><div class="w-5 h-5 rounded-full bg-gradient-to-br from-[#0EA5E9] to-[#06b6d4]"></div><span class="text-xs font-semibold text-[#0EA5E9]">Pulse AI</span></div>
+                      <p class="leading-relaxed">Here's a personalized follow-up based on your last conversation about the Q2 expansion plan and their budget review timeline...</p>
+                      <div class="mt-3 flex gap-2"><span class="px-2.5 py-1 text-xs bg-cyan-50 text-cyan-700 rounded-full border border-cyan-200">Copy</span><span class="px-2.5 py-1 text-xs bg-cyan-50 text-cyan-700 rounded-full border border-cyan-200">Send via WhatsApp</span></div>
+                    </div>
+                  </div>
+                  <div class="flex justify-end"><div class="bg-gradient-to-r from-[#0EA5E9] to-[#06b6d4] text-white text-sm rounded-2xl rounded-tr-md px-4 py-2.5 max-w-[80%] shadow-sm">Make it more casual and friendly</div></div>
+                  <div class="flex justify-start">
+                    <div class="bg-white border border-gray-200 text-sm rounded-2xl rounded-tl-md px-4 py-3 max-w-[85%] text-gray-700 shadow-sm">
+                      <div class="flex items-center gap-1.5 mb-2"><div class="w-5 h-5 rounded-full bg-gradient-to-br from-[#0EA5E9] to-[#06b6d4]"></div><span class="text-xs font-semibold text-[#0EA5E9]">Pulse AI</span></div>
+                      Done! Here's a friendlier version. Ready to send via WhatsApp or email. &#10003;
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 3: Customer Detail -->
+              <div class="demo-slide absolute inset-0 p-4 sm:p-8 bg-gradient-to-br from-slate-50 to-white" data-index="2">
+                <div class="flex items-center gap-4 mb-5">
+                  <div class="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white font-bold">AC</div>
+                  <div>
+                    <h4 class="text-lg font-bold text-gray-800">Acme Corporation</h4>
+                    <p class="text-sm text-gray-500">Enterprise Client &bull; $245K lifetime value</p>
+                  </div>
+                  <span class="ml-auto hidden sm:inline px-3 py-1 text-xs font-semibold bg-green-100 text-green-700 rounded-full">Active</span>
+                </div>
+                <div class="grid grid-cols-4 gap-3 mb-5">
+                  <div class="text-center p-3 bg-white rounded-xl border border-gray-100 shadow-sm"><p class="text-xl font-bold text-gray-900">12</p><p class="text-[11px] text-gray-400">Orders</p></div>
+                  <div class="text-center p-3 bg-white rounded-xl border border-gray-100 shadow-sm"><p class="text-xl font-bold text-gray-900">98%</p><p class="text-[11px] text-gray-400">On Time</p></div>
+                  <div class="text-center p-3 bg-white rounded-xl border border-gray-100 shadow-sm"><p class="text-xl font-bold text-[#0EA5E9]">High</p><p class="text-[11px] text-gray-400">Priority</p></div>
+                  <div class="text-center p-3 bg-white rounded-xl border border-gray-100 shadow-sm"><p class="text-xl font-bold text-gray-900">4.8</p><p class="text-[11px] text-gray-400">Score</p></div>
+                </div>
+                <h5 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Recent Activity</h5>
+                <div class="space-y-2">
+                  <div class="flex items-center gap-3 p-3 bg-white rounded-lg border border-gray-100"><span class="w-2 h-2 rounded-full bg-green-500 shrink-0"></span><p class="text-sm text-gray-700">WhatsApp message — <span class="text-gray-400">2h ago</span></p></div>
+                  <div class="flex items-center gap-3 p-3 bg-white rounded-lg border border-gray-100"><span class="w-2 h-2 rounded-full bg-blue-500 shrink-0"></span><p class="text-sm text-gray-700">Email opened — <span class="text-gray-400">yesterday</span></p></div>
+                  <div class="flex items-center gap-3 p-3 bg-white rounded-lg border border-gray-100"><span class="w-2 h-2 rounded-full bg-purple-500 shrink-0"></span><p class="text-sm text-gray-700">Meeting scheduled — <span class="text-gray-400">Mar 8</span></p></div>
+                </div>
+              </div>
+
+              <!-- Slide 4: Pipeline -->
+              <div class="demo-slide absolute inset-0 p-4 sm:p-8 bg-gradient-to-br from-slate-50 to-white" data-index="3">
+                <div class="flex items-center justify-between mb-5">
+                  <h4 class="text-lg font-bold text-gray-800">Sales Pipeline</h4>
+                  <div class="flex items-center gap-2"><span class="text-sm text-gray-400">Total:</span><span class="text-lg font-bold text-gray-900">$1.2M</span></div>
+                </div>
+                <div class="space-y-4">
+                  <div>
+                    <div class="flex items-center justify-between mb-1.5"><span class="text-sm font-medium text-gray-700">Lead</span><span class="text-sm text-gray-400">18 deals &bull; $340K</span></div>
+                    <div class="h-3 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-gray-400 rounded-full" style="width: 100%"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex items-center justify-between mb-1.5"><span class="text-sm font-medium text-gray-700">Qualified</span><span class="text-sm text-gray-400">12 deals &bull; $285K</span></div>
+                    <div class="h-3 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-[#0EA5E9] rounded-full" style="width: 67%"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex items-center justify-between mb-1.5"><span class="text-sm font-medium text-gray-700">Proposal</span><span class="text-sm text-gray-400">8 deals &bull; $210K</span></div>
+                    <div class="h-3 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-[#06b6d4] rounded-full" style="width: 44%"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex items-center justify-between mb-1.5"><span class="text-sm font-medium text-gray-700">Negotiation</span><span class="text-sm text-gray-400">5 deals &bull; $183K</span></div>
+                    <div class="h-3 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-[#0EA5E9] to-emerald-500 rounded-full" style="width: 28%"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex items-center justify-between mb-1.5"><span class="text-sm font-semibold text-green-600">Closed Won</span><span class="text-sm font-medium text-green-500">3 deals &bull; $182K</span></div>
+                    <div class="h-3 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-emerald-400 to-green-500 rounded-full" style="width: 15%"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Caption + Controls -->
+          <div class="mt-8 text-center">
+            <!-- Caption -->
+            <p id="demo-caption" class="text-lg sm:text-xl font-semibold text-gray-800 mb-1 transition-opacity duration-500">Smart Dashboard</p>
+            <p id="demo-subcaption" class="text-sm sm:text-base text-gray-500 mb-6 transition-opacity duration-500">Never miss a follow-up</p>
+
+            <!-- Navigation dots (p-4 ensures 44px+ tap target) -->
+            <div class="flex items-center justify-center">
+              <button class="demo-dot group relative p-4 transition-all duration-300" data-slide="0" aria-label="Slide 1">
+                <span class="block w-3 h-3 rounded-full bg-[#0EA5E9]"></span>
+              </button>
+              <button class="demo-dot p-4 transition-all duration-300" data-slide="1" aria-label="Slide 2">
+                <span class="block w-3 h-3 rounded-full bg-gray-300"></span>
+              </button>
+              <button class="demo-dot p-4 transition-all duration-300" data-slide="2" aria-label="Slide 3">
+                <span class="block w-3 h-3 rounded-full bg-gray-300"></span>
+              </button>
+              <button class="demo-dot p-4 transition-all duration-300" data-slide="3" aria-label="Slide 4">
+                <span class="block w-3 h-3 rounded-full bg-gray-300"></span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Decorative glow -->
+          <div class="absolute -z-10 -inset-4 bg-gradient-to-br from-[#0EA5E9]/5 to-[#06b6d4]/5 rounded-3xl blur-xl"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ BENEFITS ═══════════════════ -->
+  <section class="py-20 sm:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 reveal">
+          Trusted by Sales Teams <span class="gradient-text">Worldwide</span>
+        </h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 max-w-4xl mx-auto">
+        <div class="flex items-center gap-3 p-5 bg-gradient-to-br from-cyan-50/50 to-white rounded-xl border border-cyan-100/60 reveal reveal-delay-1">
+          <div class="w-10 h-10 bg-gradient-to-br from-[#0EA5E9] to-[#06b6d4] rounded-xl flex items-center justify-center text-white shrink-0">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+          </div>
+          <p class="font-semibold text-gray-800">Never miss a follow-up again</p>
+        </div>
+
+        <div class="flex items-center gap-3 p-5 bg-gradient-to-br from-cyan-50/50 to-white rounded-xl border border-cyan-100/60 reveal reveal-delay-1">
+          <div class="w-10 h-10 bg-gradient-to-br from-[#0EA5E9] to-[#06b6d4] rounded-xl flex items-center justify-center text-white shrink-0">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+          </div>
+          <p class="font-semibold text-gray-800">Close deals 3x faster</p>
+        </div>
+
+        <div class="flex items-center gap-3 p-5 bg-gradient-to-br from-cyan-50/50 to-white rounded-xl border border-cyan-100/60 reveal reveal-delay-2">
+          <div class="w-10 h-10 bg-gradient-to-br from-[#0EA5E9] to-[#06b6d4] rounded-xl flex items-center justify-center text-white shrink-0">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+          </div>
+          <p class="font-semibold text-gray-800">Track 1,000+ conversations effortlessly</p>
+        </div>
+
+        <div class="flex items-center gap-3 p-5 bg-gradient-to-br from-cyan-50/50 to-white rounded-xl border border-cyan-100/60 reveal reveal-delay-2">
+          <div class="w-10 h-10 bg-gradient-to-br from-[#0EA5E9] to-[#06b6d4] rounded-xl flex items-center justify-center text-white shrink-0">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+          </div>
+          <p class="font-semibold text-gray-800">AI handles the busy work</p>
+        </div>
+
+        <div class="flex items-center gap-3 p-5 bg-gradient-to-br from-cyan-50/50 to-white rounded-xl border border-cyan-100/60 reveal reveal-delay-3">
+          <div class="w-10 h-10 bg-gradient-to-br from-[#0EA5E9] to-[#06b6d4] rounded-xl flex items-center justify-center text-white shrink-0">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+          </div>
+          <p class="font-semibold text-gray-800">Works with WhatsApp, Email, CRM</p>
+        </div>
+
+        <div class="flex items-center gap-3 p-5 bg-gradient-to-br from-cyan-50/50 to-white rounded-xl border border-cyan-100/60 reveal reveal-delay-3">
+          <div class="w-10 h-10 bg-gradient-to-br from-[#0EA5E9] to-[#06b6d4] rounded-xl flex items-center justify-center text-white shrink-0">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+          </div>
+          <p class="font-semibold text-gray-800">Set up in minutes, not days</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FINAL CTA ═══════════════════ -->
+  <section class="py-20 sm:py-28 relative overflow-hidden">
+    <!-- Background -->
+    <div class="absolute inset-0 bg-gradient-to-br from-[#0b1120] via-[#0c1a2e] to-[#0a1628]"></div>
+    <div class="absolute top-0 left-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-[#0EA5E9]/10 blob blur-3xl"></div>
+    <div class="absolute bottom-0 right-1/4 w-48 h-48 sm:w-80 sm:h-80 bg-[#06b6d4]/10 blob-2 blur-3xl"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-6 reveal">
+        Ready to Transform<br />
+        <span class="bg-gradient-to-r from-[#0EA5E9] to-[#06b6d4] bg-clip-text text-transparent">Your Sales?</span>
+      </h2>
+      <p class="text-lg text-gray-400 mb-10 max-w-xl mx-auto reveal reveal-delay-1">
+        Join sales teams who never miss a deal.
+      </p>
+      <div class="reveal reveal-delay-2">
+        <a href="https://app.aisalespulse.com" class="inline-flex items-center px-10 py-4 text-lg font-bold text-white bg-gradient-to-r from-[#0EA5E9] to-[#06b6d4] rounded-full hover:shadow-xl hover:shadow-cyan-500/30 hover:-translate-y-1 transition-all duration-300 pulse-ring">
+          Get Started — It's Free
+          <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+        </a>
+      </div>
+      <p class="text-sm text-gray-500 mt-6 reveal reveal-delay-3">
+        No credit card required. Set up in 2 minutes.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <footer class="bg-[#0b1120] border-t border-white/5 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-8 md:gap-10">
+        <!-- Brand -->
+        <div class="md:col-span-1">
+          <a href="#" class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-gradient-to-br from-[#0EA5E9] to-[#06b6d4] pulse-glow"></div>
+            <span class="text-xl font-bold text-white tracking-tight">PULSE</span>
+          </a>
+          <p class="text-sm text-gray-400 leading-relaxed">Your Pulse on Every Deal</p>
+        </div>
+
+        <!-- Product -->
+        <div>
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Product</h4>
+          <ul class="space-y-1">
+            <li><a href="#features" class="block py-1.5 text-sm text-gray-400 hover:text-[#0EA5E9] transition-colors">Features</a></li>
+            <li><a href="#how-it-works" class="block py-1.5 text-sm text-gray-400 hover:text-[#0EA5E9] transition-colors">How It Works</a></li>
+            <li><a href="https://app.aisalespulse.com" class="block py-1.5 text-sm text-gray-400 hover:text-[#0EA5E9] transition-colors">Login</a></li>
+          </ul>
+        </div>
+
+        <!-- Company -->
+        <div>
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Company</h4>
+          <ul class="space-y-1">
+            <li><a href="#" class="block py-1.5 text-sm text-gray-400 hover:text-[#0EA5E9] transition-colors">About</a></li>
+            <li><a href="mailto:hello@aisalespulse.com" class="block py-1.5 text-sm text-gray-400 hover:text-[#0EA5E9] transition-colors">Contact</a></li>
+            <li><a href="#" class="block py-1.5 text-sm text-gray-400 hover:text-[#0EA5E9] transition-colors">Privacy</a></li>
+            <li><a href="#" class="block py-1.5 text-sm text-gray-400 hover:text-[#0EA5E9] transition-colors">Terms</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Get in Touch</h4>
+          <a href="mailto:hello@aisalespulse.com" class="block py-1.5 text-sm text-gray-400 hover:text-[#0EA5E9] transition-colors">hello@aisalespulse.com</a>
+        </div>
+      </div>
+
+      <div class="border-t border-white/5 mt-12 pt-8 text-center">
+        <p class="text-sm text-gray-500">&copy; 2026 AI Sales Pulse, Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════ SCRIPTS ═══════════════════ -->
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+      menuIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        menuIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+      });
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    // Navbar background on scroll
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        nav.classList.add('shadow-sm');
+      } else {
+        nav.classList.remove('shadow-sm');
+      }
+    });
+
+    // Demo slideshow — all visibility controlled via inline style.cssText to avoid Tailwind CDN conflicts
+    (function () {
+      const slides = document.querySelectorAll('.demo-slide');
+      const dots = document.querySelectorAll('.demo-dot');
+      const caption = document.getElementById('demo-caption');
+      const subcaption = document.getElementById('demo-subcaption');
+      const progress = document.getElementById('demo-progress');
+      if (!slides.length) return;
+
+      const data = [
+        { caption: 'Smart Dashboard', sub: 'Never miss a follow-up' },
+        { caption: 'AI Assistant', sub: 'Answers your questions instantly' },
+        { caption: 'Complete Customer View', sub: 'All conversations in one place' },
+        { caption: 'Pipeline Management', sub: 'Track every opportunity' },
+      ];
+
+      let current = 0;
+      let interval;
+      let progressAnim;
+      const DURATION = 4000;
+
+      function goTo(index, skipTransition) {
+        const prevIndex = current;
+        slides.forEach((s, i) => {
+          if (i === index) {
+            if (skipTransition) {
+              s.style.cssText = 'position:absolute;inset:0;z-index:2;opacity:1;transform:translateY(0);';
+            } else {
+              // Fade in: start hidden, animate on next frame
+              s.style.cssText = 'position:absolute;inset:0;z-index:2;opacity:0;transform:translateY(8px);transition:opacity 0.5s ease,transform 0.5s ease;';
+              requestAnimationFrame(() => requestAnimationFrame(() => {
+                s.style.opacity = '1';
+                s.style.transform = 'translateY(0)';
+              }));
+            }
+          } else if (i === prevIndex && !skipTransition) {
+            // Fade out the departing slide
+            s.style.cssText = 'position:absolute;inset:0;z-index:1;opacity:1;transform:translateY(0);transition:opacity 0.5s ease,transform 0.5s ease;pointer-events:none;';
+            requestAnimationFrame(() => requestAnimationFrame(() => {
+              s.style.opacity = '0';
+              s.style.transform = 'translateY(-8px)';
+            }));
+          } else {
+            s.style.cssText = 'position:absolute;inset:0;z-index:0;opacity:0;pointer-events:none;';
+          }
+        });
+
+        dots.forEach((d, i) => {
+          const dot = d.querySelector('span') || d;
+          dot.style.cssText = i === index
+            ? 'display:block;width:2rem;height:0.75rem;border-radius:9999px;background-color:#0EA5E9;transition:all 0.3s;'
+            : 'display:block;width:0.75rem;height:0.75rem;border-radius:9999px;background-color:#d1d5db;transition:all 0.3s;';
+        });
+
+        caption.style.opacity = '0';
+        subcaption.style.opacity = '0';
+        setTimeout(() => {
+          caption.textContent = data[index].caption;
+          subcaption.textContent = data[index].sub;
+          caption.style.opacity = '1';
+          subcaption.style.opacity = '1';
+        }, skipTransition ? 0 : 250);
+
+        current = index;
+        startProgress();
+      }
+
+      function startProgress() {
+        if (progressAnim) cancelAnimationFrame(progressAnim);
+        const start = performance.now();
+        function tick(now) {
+          const elapsed = now - start;
+          const pct = Math.min((elapsed / DURATION) * 100, 100);
+          progress.style.width = pct + '%';
+          if (pct < 100) {
+            progressAnim = requestAnimationFrame(tick);
+          }
+        }
+        progress.style.width = '0%';
+        progressAnim = requestAnimationFrame(tick);
+      }
+
+      function next() {
+        goTo((current + 1) % slides.length);
+      }
+
+      function startAutoPlay() {
+        clearInterval(interval);
+        interval = setInterval(next, DURATION);
+      }
+
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          const idx = parseInt(dot.dataset.slide);
+          goTo(idx);
+          startAutoPlay();
+        });
+      });
+
+      // Init
+      goTo(0, true);
+      startAutoPlay();
+    })();
+  </script>
+</body>
+</html>
