@@ -3,79 +3,391 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Privacy Policy — Pulse by AI Sales Pulse</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <title>Privacy Policy — AI Sales Pulse</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', system-ui, sans-serif; background: #0f172a; color: #cbd5e1; line-height: 1.7; }
-    .container { max-width: 720px; margin: 0 auto; padding: 60px 24px 100px; }
-    a { color: #0EA5E9; text-decoration: none; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: #1e293b;
+      background: #f8fafc;
+      line-height: 1.7;
+    }
+    .header {
+      background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+      padding: 60px 20px 40px;
+      text-align: center;
+      color: white;
+    }
+    .header a.logo {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: white;
+      text-decoration: none;
+    }
+    .header h1 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-top: 20px;
+    }
+    .header p.updated {
+      margin-top: 8px;
+      font-size: 14px;
+      opacity: 0.85;
+    }
+    .container {
+      max-width: 800px;
+      margin: -30px auto 60px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      padding: 48px;
+    }
+    h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #0ea5e9;
+      margin-top: 40px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    h3 {
+      font-size: 17px;
+      font-weight: 600;
+      color: #334155;
+      margin-top: 24px;
+      margin-bottom: 8px;
+    }
+    p, li {
+      font-size: 15px;
+      color: #475569;
+      margin-bottom: 10px;
+    }
+    ul, ol {
+      padding-left: 24px;
+      margin-bottom: 16px;
+    }
+    li { margin-bottom: 6px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px;
+      font-size: 14px;
+    }
+    th {
+      background: #f1f5f9;
+      text-align: left;
+      padding: 10px 14px;
+      font-weight: 600;
+      color: #334155;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #475569;
+    }
+    .highlight-box {
+      background: #f0f9ff;
+      border-left: 4px solid #0ea5e9;
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 20px 0;
+    }
+    .highlight-box p { margin-bottom: 0; color: #0369a1; }
+    a { color: #0ea5e9; text-decoration: none; }
     a:hover { text-decoration: underline; }
-    h1 { color: white; font-size: 36px; font-weight: 800; margin-bottom: 8px; }
-    h2 { color: white; font-size: 22px; font-weight: 700; margin-top: 40px; margin-bottom: 12px; }
-    p, li { font-size: 15px; margin-bottom: 12px; }
-    ul { padding-left: 24px; margin-bottom: 16px; }
-    .subtitle { color: #64748b; font-size: 14px; margin-bottom: 40px; }
-    .back { display: inline-flex; align-items: center; gap: 6px; color: #0EA5E9; font-weight: 600; font-size: 14px; margin-bottom: 32px; }
+    .footer {
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+    .toc { margin: 20px 0 30px; }
+    .toc ol { counter-reset: section; list-style: none; padding-left: 0; }
+    .toc li { counter-increment: section; margin-bottom: 6px; }
+    .toc li::before {
+      content: counter(section) ". ";
+      font-weight: 600;
+      color: #0ea5e9;
+    }
+    .toc a { color: #334155; font-weight: 500; }
+    @media (max-width: 640px) {
+      .container { margin: -20px 12px 40px; padding: 28px 20px; }
+      .header h1 { font-size: 26px; }
+      h2 { font-size: 19px; }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <a href="/" class="back">&larr; Back to Home</a>
-    <h1>Privacy Policy</h1>
-    <p class="subtitle">Last updated: March 10, 2026 &mdash; AI Sales Pulse, Inc.</p>
 
-    <p>AI Sales Pulse, Inc. ("we," "us," or "Pulse") is committed to protecting the privacy of our users. This policy explains how we collect, use, and safeguard your information when you use the Pulse platform at app.aisalespulse.com.</p>
+<div class="header">
+  <a href="https://aisalespulse.com" class="logo">PULSE</a>
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last Updated: March 10, 2026</p>
+</div>
 
-    <h2>1. Information We Collect</h2>
-    <p><strong>Account Information:</strong> When you sign up, we collect your name, email address, company name, phone number (optional), and password (stored as a salted hash — we never store plaintext passwords).</p>
-    <p><strong>Business Data:</strong> Customer records, messages, follow-ups, sales data, and other information you enter into Pulse. This data belongs to your company.</p>
-    <p><strong>Integration Data:</strong> If you connect third-party services (Outlook, WhatsApp, ERP systems), we access only the data necessary to provide our features. We do not sell or share this data.</p>
-    <p><strong>Usage Data:</strong> We collect anonymous analytics such as pages visited and feature usage to improve our product. We do not use third-party tracking scripts.</p>
+<div class="container">
 
-    <h2>2. How We Use Your Information</h2>
-    <ul>
-      <li>To provide and operate the Pulse platform</li>
-      <li>To send transactional emails (2FA codes, password resets, daily digests)</li>
-      <li>To improve our product based on aggregated, anonymous usage patterns</li>
-      <li>To provide customer support</li>
-    </ul>
-    <p>We <strong>never</strong> sell, rent, or share your personal or business data with third parties for marketing purposes.</p>
+  <p>AI Sales Pulse, Inc. ("<strong>AI Sales Pulse</strong>," "<strong>we</strong>," "<strong>us</strong>," or "<strong>our</strong>") operates the Pulse sales assistant platform (the "<strong>Service</strong>"). This Privacy Policy explains what personal data we collect, why we collect it, how we protect it, and what rights you have.</p>
 
-    <h2>3. Data Storage & Security</h2>
-    <p>Your data is stored in encrypted PostgreSQL databases hosted on secure cloud infrastructure. All data in transit is protected with TLS 1.3 encryption. Passwords are hashed using bcrypt. We support two-factor authentication for additional account security.</p>
-
-    <h2>4. Multi-Tenant Data Isolation</h2>
-    <p>Pulse is built with strict multi-tenant isolation. Each company's data is logically separated at the database level. No company can access another company's records, messages, customers, or settings.</p>
-
-    <h2>5. Third-Party Services</h2>
-    <p>We use the following third-party services:</p>
-    <ul>
-      <li><strong>Resend</strong> — for transactional email delivery</li>
-      <li><strong>Anthropic Claude</strong> — for AI-powered features (your data is not used to train AI models)</li>
-      <li><strong>Railway</strong> — for cloud hosting infrastructure</li>
-    </ul>
-
-    <h2>6. Your Rights</h2>
-    <p>You may request to:</p>
-    <ul>
-      <li>Access all personal data we hold about you</li>
-      <li>Correct any inaccurate information</li>
-      <li>Delete your account and all associated data</li>
-      <li>Export your business data</li>
-    </ul>
-    <p>To exercise these rights, email <a href="mailto:hello@aisalespulse.com">hello@aisalespulse.com</a>.</p>
-
-    <h2>7. Cookies</h2>
-    <p>Pulse uses only essential cookies required for authentication (JWT session tokens stored in localStorage). We do not use advertising or tracking cookies.</p>
-
-    <h2>8. Changes to This Policy</h2>
-    <p>We may update this policy from time to time. We will notify users of significant changes via email or an in-app announcement.</p>
-
-    <h2>9. Contact</h2>
-    <p>AI Sales Pulse, Inc.<br />
-    Email: <a href="mailto:hello@aisalespulse.com">hello@aisalespulse.com</a><br />
-    Website: <a href="https://aisalespulse.com">aisalespulse.com</a></p>
+  <div class="highlight-box">
+    <p><strong>Our Core Principle:</strong> Your business data belongs to you. We collect only what is necessary to deliver the Service, we never sell your data, and you can export or delete your data at any time.</p>
   </div>
+
+  <nav class="toc">
+    <h3>Table of Contents</h3>
+    <ol>
+      <li><a href="#info-we-collect">Information We Collect</a></li>
+      <li><a href="#how-we-use">How We Use Your Information</a></li>
+      <li><a href="#third-party">Third-Party Services &amp; Data Sharing</a></li>
+      <li><a href="#data-security">Data Security</a></li>
+      <li><a href="#multi-tenancy">Multi-Tenant Data Isolation</a></li>
+      <li><a href="#data-retention">Data Retention</a></li>
+      <li><a href="#your-rights">Your Rights (GDPR &amp; CCPA)</a></li>
+      <li><a href="#cookies">Cookies &amp; Tracking</a></li>
+      <li><a href="#children">Children's Privacy</a></li>
+      <li><a href="#changes">Changes to This Policy</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+    </ol>
+  </nav>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="info-we-collect">1. Information We Collect</h2>
+
+  <h3>1.1 Account Information</h3>
+  <p>When you create an account, we collect:</p>
+  <ul>
+    <li><strong>Name</strong> and <strong>email address</strong> (required)</li>
+    <li><strong>Phone number</strong> (optional)</li>
+    <li><strong>Company name</strong> (required)</li>
+    <li><strong>Password</strong> (stored as an irreversible bcrypt hash &mdash; we never store your actual password)</li>
+    <li><strong>ERP/distribution system type</strong> (e.g., BGATE, SAP, NetSuite) for integration configuration</li>
+  </ul>
+
+  <h3>1.2 Business Data</h3>
+  <p>As you use the Service, you and your team may store:</p>
+  <ul>
+    <li>Customer and prospect records (names, emails, phone numbers, company information, addresses)</li>
+    <li>Sales pipeline data (opportunities, deal values, stages)</li>
+    <li>Messages and conversation threads (email and WhatsApp, if connected)</li>
+    <li>Product catalog information (SKUs, pricing, inventory)</li>
+    <li>Follow-up tasks, notes, and reminders</li>
+    <li>Purchase/order history</li>
+    <li>AI-generated insights and draft messages</li>
+  </ul>
+
+  <h3>1.3 Security &amp; Session Data</h3>
+  <p>To protect your account, we collect:</p>
+  <ul>
+    <li><strong>IP address</strong> and approximate <strong>geographic location</strong> on login</li>
+    <li><strong>Device and browser information</strong> (e.g., "Chrome on macOS")</li>
+    <li><strong>Login timestamps</strong> and session activity</li>
+    <li><strong>Audit log events</strong> (logins, password changes, 2FA setup, session revocations)</li>
+  </ul>
+
+  <h3>1.4 Integration Credentials</h3>
+  <p>If you connect third-party services, we store:</p>
+  <ul>
+    <li>API keys or OAuth tokens for your ERP system, email provider, WhatsApp Business, or AI provider</li>
+    <li>All credentials are <strong>encrypted at rest</strong> using AES symmetric encryption before storage</li>
+  </ul>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="how-we-use">2. How We Use Your Information</h2>
+  <table>
+    <thead>
+      <tr><th>Purpose</th><th>Data Used</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Provide the Service (CRM, pipeline, AI insights)</td><td>Account info, business data</td></tr>
+      <tr><td>Authenticate you and secure your account</td><td>Email, password hash, 2FA codes, sessions</td></tr>
+      <tr><td>Send transactional emails (2FA codes, password resets, daily digests, welcome emails)</td><td>Email address, name, task summaries</td></tr>
+      <tr><td>Connect your ERP, email, or messaging systems</td><td>Integration credentials, sync configuration</td></tr>
+      <tr><td>Generate AI-powered insights and draft messages</td><td>Customer data, conversation history, product catalog (sent to AI provider only when you enable AI features)</td></tr>
+      <tr><td>Detect and prevent abuse</td><td>IP address, failed login attempts, rate limiting</td></tr>
+      <tr><td>Maintain audit trail for compliance</td><td>Security events, timestamps, device info</td></tr>
+    </tbody>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>We do NOT:</strong> sell your data, use it for advertising, share it with data brokers, or use your business data to train AI models.</p>
+  </div>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="third-party">3. Third-Party Services &amp; Data Sharing</h2>
+  <p>We use the following third-party services to operate Pulse. Data is shared only as necessary to provide features you enable:</p>
+
+  <table>
+    <thead>
+      <tr><th>Service</th><th>Purpose</th><th>Data Shared</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Resend</strong></td>
+        <td>Transactional email delivery</td>
+        <td>Email address, name, email content (2FA codes, password reset links, daily digests, welcome emails)</td>
+      </tr>
+      <tr>
+        <td><strong>Anthropic (Claude AI)</strong></td>
+        <td>AI sales assistant (opt-in)</td>
+        <td>Business data you query about (customer info, product catalog, sales metrics). Only activated when you provide your own API key and use the AI chat feature.</td>
+      </tr>
+      <tr>
+        <td><strong>Microsoft Graph API</strong></td>
+        <td>Outlook email integration (opt-in)</td>
+        <td>OAuth tokens, email messages. Only activated when you connect your Outlook account via OAuth2 authorization.</td>
+      </tr>
+      <tr>
+        <td><strong>Meta WhatsApp Business API</strong></td>
+        <td>WhatsApp messaging integration (opt-in)</td>
+        <td>WhatsApp access token, contact metadata. Only activated when you configure WhatsApp Business integration.</td>
+      </tr>
+      <tr>
+        <td><strong>BGATE / ERP Systems</strong></td>
+        <td>Customer &amp; product data sync (opt-in)</td>
+        <td>API credentials, salesperson code. Syncs customer, product, and inventory data from your ERP. Only activated when you configure your ERP connection.</td>
+      </tr>
+      <tr>
+        <td><strong>Google Fonts</strong></td>
+        <td>Web font delivery</td>
+        <td>Standard HTTP request data (IP address, browser info) when loading the Inter font family</td>
+      </tr>
+      <tr>
+        <td><strong>Railway</strong></td>
+        <td>Application hosting</td>
+        <td>All application data is hosted on Railway's infrastructure. Railway provides the PostgreSQL database and compute environment.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>All optional integrations (AI, email, WhatsApp, ERP) are <strong>disabled by default</strong> and only activated when you explicitly configure them in Settings &gt; Integrations.</p>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="data-security">4. Data Security</h2>
+  <p>We implement the following security measures to protect your data:</p>
+
+  <h3>Encryption</h3>
+  <ul>
+    <li><strong>In Transit:</strong> All data transmitted between your browser and our servers is encrypted via TLS/HTTPS. We enforce HSTS (HTTP Strict Transport Security) with a one-year maximum age.</li>
+    <li><strong>At Rest:</strong> Integration API keys and OAuth tokens are encrypted using AES symmetric encryption (Fernet) before database storage.</li>
+    <li><strong>Passwords:</strong> Stored as irreversible bcrypt hashes (12 rounds). We never store or have access to your plaintext password.</li>
+  </ul>
+
+  <h3>Authentication &amp; Access Control</h3>
+  <ul>
+    <li><strong>Two-Factor Authentication (2FA):</strong> Optional email-based one-time codes with backup recovery codes (bcrypt-hashed).</li>
+    <li><strong>Session Management:</strong> 30-minute inactivity timeout, 8-hour absolute session limit. Sessions can be viewed and revoked from the Security settings page.</li>
+    <li><strong>Brute Force Protection:</strong> Account lockout after 5 failed login attempts (15-minute cooldown). API rate limiting on all authentication endpoints.</li>
+    <li><strong>Role-Based Access:</strong> Three role tiers (sales rep, admin, super admin) with strict permission boundaries.</li>
+  </ul>
+
+  <h3>Security Headers</h3>
+  <ul>
+    <li>Strict-Transport-Security (HSTS)</li>
+    <li>X-Content-Type-Options: nosniff</li>
+    <li>X-Frame-Options: DENY (prevents clickjacking)</li>
+    <li>Referrer-Policy: strict-origin-when-cross-origin</li>
+    <li>Permissions-Policy: camera, microphone, and geolocation disabled</li>
+  </ul>
+
+  <h3>Infrastructure</h3>
+  <ul>
+    <li>Hosted on Railway's managed infrastructure</li>
+    <li>PostgreSQL database with parameterized queries (SQL injection prevention)</li>
+    <li>CORS restricted to authorized origins only</li>
+    <li>Comprehensive audit logging of all security events</li>
+  </ul>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="multi-tenancy">5. Multi-Tenant Data Isolation</h2>
+  <p>Pulse is a multi-tenant platform. Each company's data is <strong>strictly isolated</strong>:</p>
+  <ul>
+    <li>Every business data table is scoped by a <code>company_id</code> identifier.</li>
+    <li>All database queries filter by the authenticated user's company, ensuring you can never access another company's customers, products, messages, or pipeline data.</li>
+    <li>Admin users can only manage users and data within their own company.</li>
+    <li>Foreign key constraints and database-level indexes enforce isolation at the schema level.</li>
+  </ul>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="data-retention">6. Data Retention</h2>
+  <table>
+    <thead>
+      <tr><th>Data Type</th><th>Retention Period</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Account &amp; profile data</td><td>Until you delete your account</td></tr>
+      <tr><td>Business data (customers, products, messages)</td><td>Until you delete your account or individual records</td></tr>
+      <tr><td>Session data</td><td>Automatically expired after 8 hours (30 min inactivity)</td></tr>
+      <tr><td>2FA verification codes</td><td>Automatically deleted after 5 minutes</td></tr>
+      <tr><td>Password reset tokens</td><td>Automatically expired after 1 hour</td></tr>
+      <tr><td>Failed login attempts</td><td>Cleared after 15 minutes or on successful login</td></tr>
+      <tr><td>Audit log</td><td>Retained for compliance; available in your data export</td></tr>
+      <tr><td>Integration credentials</td><td>Until you disconnect the integration</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="your-rights">7. Your Rights</h2>
+  <p>Regardless of where you are located, you have the following rights regarding your personal data:</p>
+
+  <h3>GDPR Rights (EU/EEA/UK)</h3>
+  <ul>
+    <li><strong>Right of Access:</strong> View all data we hold about you via your account settings.</li>
+    <li><strong>Right to Portability (Article 20):</strong> Export all your personal and business data as a JSON file via <strong>Settings &gt; Privacy &gt; Export My Data</strong>. The export includes your profile, audit log, sessions, customers, messages, and follow-ups.</li>
+    <li><strong>Right to Rectification:</strong> Update your personal information at any time through your profile settings.</li>
+    <li><strong>Right to Erasure:</strong> Request deletion of your account and all associated data by contacting us.</li>
+    <li><strong>Right to Restrict Processing:</strong> Use Privacy Settings to control which communication channels are tracked and how AI processes your data.</li>
+    <li><strong>Right to Object:</strong> Opt out of daily digest emails and AI features at any time.</li>
+  </ul>
+
+  <h3>CCPA Rights (California)</h3>
+  <ul>
+    <li><strong>Right to Know:</strong> This policy describes all categories of personal information we collect and how they are used.</li>
+    <li><strong>Right to Delete:</strong> Contact us to request deletion of your personal information.</li>
+    <li><strong>Right to Non-Discrimination:</strong> We will not treat you differently for exercising your privacy rights.</li>
+    <li><strong>No Sale of Personal Information:</strong> We do not sell, rent, or share personal information for cross-context behavioral advertising.</li>
+  </ul>
+
+  <p>To exercise any of these rights, email us at <a href="mailto:hello@aisalespulse.com">hello@aisalespulse.com</a>.</p>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="cookies">8. Cookies &amp; Tracking</h2>
+  <p>Pulse uses <strong>minimal cookies</strong>:</p>
+  <ul>
+    <li><strong>Authentication Token:</strong> A JSON Web Token (JWT) stored in your browser's local storage to keep you signed in. This is essential for the Service to function.</li>
+    <li><strong>Session Identifier:</strong> Used to manage your active session and enforce timeout policies.</li>
+  </ul>
+  <p>We do <strong>not</strong> use:</p>
+  <ul>
+    <li>Third-party analytics or tracking cookies</li>
+    <li>Advertising cookies or pixels</li>
+    <li>Cross-site tracking of any kind</li>
+  </ul>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="children">9. Children's Privacy</h2>
+  <p>Pulse is a business-to-business (B2B) application designed for sales professionals. We do not knowingly collect personal information from anyone under the age of 18. If you believe a minor has provided us with personal data, please contact us and we will delete it promptly.</p>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="changes">10. Changes to This Policy</h2>
+  <p>We may update this Privacy Policy from time to time. When we make material changes, we will notify you by email or through a platform announcement within the Service. The "Last Updated" date at the top of this page indicates when it was last revised.</p>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="contact">11. Contact Us</h2>
+  <p>If you have any questions about this Privacy Policy or your data, please contact us:</p>
+  <ul>
+    <li><strong>Email:</strong> <a href="mailto:hello@aisalespulse.com">hello@aisalespulse.com</a></li>
+    <li><strong>Company:</strong> AI Sales Pulse, Inc.</li>
+    <li><strong>Website:</strong> <a href="https://aisalespulse.com">aisalespulse.com</a></li>
+  </ul>
+
+</div>
+
+<div class="footer">
+  &copy; 2026 AI Sales Pulse, Inc. All rights reserved.
+</div>
+
 </body>
 </html>
