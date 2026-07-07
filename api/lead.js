@@ -31,7 +31,7 @@ export default async function handler(req, res) {
       headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
         from: 'Pulse Website <noreply@aisalespulse.com>',
-        to: ['hello@aisalespulse.com'],
+        to: ['eran@tradingunlimited.com'],
         reply_to: contact.includes('@') ? contact : undefined,
         subject: `New early-access request — ${name}`,
         text: `Name: ${name}\nEmail / WhatsApp: ${contact}\nSales reps: ${reps || '-'}\nLanguage: ${lang || '-'}`,
