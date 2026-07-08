@@ -47,7 +47,9 @@ h3{font-size:19px;font-weight:700}
 .sub{font-size:18px;color:var(--muted);max-width:640px}
 nav{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 nav .wrap{display:flex;align-items:center;gap:22px;height:66px;color:var(--ink)}
-.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:18px}.logo svg{color:var(--cyan)}
+.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:18px}.logo svg{color:var(--cyan);transform-origin:center;animation:heartbeat 1.6s ease-in-out infinite}
+@keyframes heartbeat{0%{transform:scale(1)}12%{transform:scale(1.28)}24%{transform:scale(1)}36%{transform:scale(1.18)}50%{transform:scale(1)}100%{transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){.logo svg{animation:none}}
 .nlinks{display:flex;gap:20px;margin-left:10px;font-size:14px;color:#4a586d}.nlinks a{white-space:nowrap}.nlinks a:hover{color:var(--ink)}
 nav .sp{margin-left:auto}
 .langtoggle{display:flex;font-size:12.5px;font-weight:700;border:1px solid var(--line);border-radius:999px;overflow:hidden}
