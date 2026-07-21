@@ -1,5 +1,13 @@
 {
   "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.aisalespulse.com" }],
+      "destination": "https://aisalespulse.com/:path*",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/",
