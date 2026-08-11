@@ -133,7 +133,7 @@
 <div class="header">
   <a href="https://aisalespulse.com" class="logo">PULSE</a>
   <h1>Terms of Service</h1>
-  <p class="updated">Last Updated: March 10, 2026</p>
+  <p class="updated">Last Updated: August 11, 2026</p>
 </div>
 
 <div class="container">
@@ -187,12 +187,18 @@
   <ul>
     <li>When you sign up, you create a <strong>Company Account</strong> and become its initial administrator.</li>
     <li>You must provide accurate and complete information, including your name, email address, and company name.</li>
-    <li>You select an ERP/distribution system type during signup (BGATE, SAP Business One, Oracle NetSuite, Epicor Prophet 21, Microsoft Dynamics 365, Acumatica, or Other) to pre-configure integration options.</li>
+    <li>You select an ERP/accounting system type during signup (BGATE, QuickBooks Online, SAP Business One, Oracle NetSuite, Microsoft Dynamics 365, Epicor Prophet 21, Acumatica, or Other) to pre-configure integration options.</li>
     <li>Each email address may only be associated with one account.</li>
   </ul>
 
-  <h3>2.3 Team Members</h3>
-  <p>Company Admins may invite additional users to their Company Account. Admins are responsible for managing user access and ensuring that team members comply with these Terms.</p>
+  <h3>2.3 Team Members &amp; Roles</h3>
+  <p>The user who creates a Company Account becomes its <strong>CEO</strong>, the highest-privilege role, which cannot be locked out of the account. The CEO and Admins may invite additional users. Roles are:</p>
+  <ul>
+    <li><strong>CEO</strong>, full access to all company data, settings, financials, and permissions; held by the account creator</li>
+    <li><strong>Admin</strong>, team, product, and configuration management as granted</li>
+    <li><strong>Sales Rep</strong>, access limited to their own assigned customers and conversations</li>
+  </ul>
+  <p>The CEO and Admins are responsible for managing user access and ensuring that team members comply with these Terms.</p>
 
   <!-- ────────────────────────────── -->
   <h2 id="service-description">3. Service Description</h2>
@@ -201,10 +207,11 @@
     <li><strong>Customer Relationship Management (CRM):</strong> Customer records, contact management, health scores, and communication history</li>
     <li><strong>Sales Pipeline:</strong> Prospect tracking, opportunity management, and deal stages</li>
     <li><strong>Unified Inbox:</strong> Email and WhatsApp conversation management (when integrations are enabled)</li>
-    <li><strong>AI Sales Assistant:</strong> AI-powered chat, insights, follow-up suggestions, and draft messages (when AI integration is enabled)</li>
+    <li><strong>AI Sales Assistant:</strong> AI-powered chat, insights, follow-up suggestions, and draft messages (included with your subscription)</li>
     <li><strong>Admin Dashboard:</strong> Team performance metrics, KPIs, promotional tools, product intelligence, and user management</li>
     <li><strong>ERP Integration:</strong> Synchronization of customers, products, and inventory from supported ERP systems</li>
     <li><strong>Daily Digest Emails:</strong> Automated summary of pending follow-ups and tasks (configurable)</li>
+    <li><strong>Sample Data:</strong> New accounts are created with clearly labeled demo records so the Service is usable before you connect a live system. Demo data is identified as such in the interface and is removed when you import or sync your own data.</li>
     <li><strong>Privacy Controls:</strong> Settings for communication tracking preferences and data export</li>
   </ul>
 
@@ -268,19 +275,21 @@
   <h2 id="integrations">7. Third-Party Integrations</h2>
 
   <h3>7.1 Your Credentials</h3>
-  <p>To connect third-party services (ERP systems, email, WhatsApp, AI providers), you provide your own API keys, OAuth authorization, or access tokens. These credentials are <strong>encrypted at rest</strong> in our database and only used to access the specific services you configure.</p>
+  <p>To connect third-party services (ERP and accounting systems, email, WhatsApp), you provide OAuth authorization, API keys, or access tokens. These credentials are <strong>encrypted at rest</strong> in our database and only used to access the specific services you configure. You may revoke any connection at any time from Settings; for OAuth-based connections, disconnecting invalidates the stored tokens.</p>
+  <p>AI features are an exception: they are included with your subscription and run on AI Sales Pulse's own AI provider account, so <strong>no API key is required from you</strong>. See Section 8.</p>
 
   <h3>7.2 Third-Party Terms</h3>
   <p>When you connect an Integration, you are also subject to the terms of service and privacy policies of that third-party provider. We are not responsible for the practices or policies of third-party services. Currently supported integrations include:</p>
   <ul>
     <li><strong>BGATE, SAP Business One, Oracle NetSuite, Epicor Prophet 21, Microsoft Dynamics 365, Acumatica</strong>, ERP/distribution system connectors</li>
+    <li><strong>QuickBooks Online (Intuit)</strong>, accounting/ERP connector authorized through Intuit's OAuth 2.0 consent flow</li>
     <li><strong>Microsoft Outlook</strong>, Email integration via Microsoft Graph API (OAuth2)</li>
     <li><strong>WhatsApp Business</strong>, Messaging integration via Meta Graph API</li>
-    <li><strong>Anthropic Claude</strong>, AI assistant (requires your own API key)</li>
+    <li><strong>Anthropic Claude</strong>, AI assistant, included with Pulse and provided on our own Anthropic account</li>
   </ul>
 
   <h3>7.3 Data Sync</h3>
-  <p>When you enable ERP synchronization, customer, product, and inventory data is periodically synced from your ERP system into Pulse. You can configure sync settings and disconnect at any time. Automated syncs run on a scheduled basis (daily) and can be triggered manually.</p>
+  <p>When you enable an ERP or accounting integration, customer, product, invoice, and inventory data is periodically synced into Pulse. You can configure sync settings and disconnect at any time. Automated syncs run on a scheduled basis (typically every 30 minutes; the interval may vary by connector and is subject to change) and can also be triggered manually.</p>
 
   <h3>7.4 Integration Availability</h3>
   <p>Third-party integrations depend on the availability and API compatibility of external services. We are not responsible for downtime, API changes, or discontinuation of third-party services.</p>
@@ -289,7 +298,7 @@
   <h2 id="ai-features">8. AI Features &amp; Limitations</h2>
 
   <h3>8.1 AI-Powered Features</h3>
-  <p>Pulse includes optional AI features powered by large language models (currently Anthropic's Claude). These features include:</p>
+  <p>Pulse includes AI features powered by large language models (currently Anthropic's Claude). AI is <strong>included with your Pulse subscription</strong> and is active by default; it is not a separate paid add-on and does not require you to supply an API key. These features include:</p>
   <ul>
     <li>AI sales assistant chat</li>
     <li>AI-generated insights and recommendations</li>
@@ -298,8 +307,11 @@
     <li>Reorder predictions and deal rescue suggestions</li>
   </ul>
 
-  <h3>8.2 Your API Key</h3>
-  <p>AI features require you to provide your own Anthropic API key. Your key is encrypted and stored securely. AI usage costs from the third-party provider are your responsibility.</p>
+  <h3>8.2 How AI Is Provided</h3>
+  <p>AI features run on AI Sales Pulse's own Anthropic API account and are included in your subscription at no additional per-use charge.</p>
+  <p>To generate insights, answers, and drafts, the business data relevant to the request (such as customer records, conversation history, product catalog, and sales metrics) is transmitted to <strong>Anthropic</strong> for processing on our behalf. We <strong>do not sell your data</strong>, and your business data is <strong>not used to train AI models</strong>, by us or by Anthropic.</p>
+  <p><strong>Optional bring-your-own key.</strong> You may instead supply your own Anthropic API key in Settings. If you do, AI requests run on your provider account, the resulting usage costs are your responsibility, and your key is encrypted at rest and used only to serve your account.</p>
+  <p>AI features are subject to fair-use limits. We may apply rate limits or temporarily suspend AI processing to protect the Service, and we may change the underlying model or provider, provided we do not materially reduce the functionality described here.</p>
 
   <h3>8.3 AI Limitations</h3>
   <div class="warning-box">
@@ -311,6 +323,17 @@
     <li>You are responsible for any actions taken based on AI recommendations.</li>
     <li>AI features send your business data (customer info, product catalog, sales metrics) to the AI provider for processing. See our <a href="https://aisalespulse.com/privacy">Privacy Policy</a> for details.</li>
   </ul>
+
+  <h3>8.4 Messages You Send</h3>
+  <p>AI-generated drafts are suggestions only. When a message is sent through a channel you have connected (email, WhatsApp, or any other Integration), that message is <strong>your communication</strong>, transmitted under your identity, your business name, and your own sending credentials, even where the text originated as an AI draft. It is not a communication from AI Sales Pulse.</p>
+  <p>You are solely responsible for reviewing content before it is sent and for ensuring that your communications comply with all applicable laws, regulations, and platform policies, including as applicable the CAN-SPAM Act, the Telephone Consumer Protection Act (TCPA), CASL, the GDPR and ePrivacy rules, and the WhatsApp Business Messaging Policy and other Meta platform terms. This includes:</p>
+  <ul>
+    <li>Obtaining and maintaining any consent or opt-in required before contacting a recipient;</li>
+    <li>Honoring opt-out, unsubscribe, and do-not-contact requests promptly;</li>
+    <li>Respecting messaging windows, template rules, and rate limits imposed by a channel provider;</li>
+    <li>Ensuring messages are accurate, not misleading, and correctly identify you as the sender.</li>
+  </ul>
+  <p>You agree to indemnify and hold us harmless against claims, penalties, and costs arising from messages sent from your account. We may suspend or disable an Integration used to send unlawful, unsolicited, or abusive messages, and any suspension or ban imposed on you by a channel provider is a matter between you and that provider.</p>
 
   <!-- ────────────────────────────── -->
   <h2 id="security">9. Security &amp; Account Responsibilities</h2>
