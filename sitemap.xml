@@ -21,9 +21,21 @@
   </url>
   <url>
     <loc>https://aisalespulse.com/blog</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aisalespulse.com/blog"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://aisalespulse.com/es/blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aisalespulse.com/blog"/>
+  </url>
+  <url>
+    <loc>https://aisalespulse.com/es/blog</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aisalespulse.com/blog"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://aisalespulse.com/es/blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aisalespulse.com/blog"/>
   </url>
   <url>
     <loc>https://aisalespulse.com/blog/whatsapp-crm-for-distributors</loc>
@@ -48,6 +60,42 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://aisalespulse.com/blog/best-crm-for-wholesale-distributors"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://aisalespulse.com/es/blog/crm-para-distribuidores-mayoristas"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://aisalespulse.com/blog/best-crm-for-wholesale-distributors"/>
+  </url>
+  <url>
+    <loc>https://aisalespulse.com/blog/crm-for-electronics-distributors</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aisalespulse.com/blog/crm-for-electronics-distributors"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://aisalespulse.com/es/blog/crm-para-distribuidores-de-electronica"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aisalespulse.com/blog/crm-for-electronics-distributors"/>
+  </url>
+  <url>
+    <loc>https://aisalespulse.com/es/blog/crm-para-distribuidores-de-electronica</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aisalespulse.com/blog/crm-for-electronics-distributors"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://aisalespulse.com/es/blog/crm-para-distribuidores-de-electronica"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aisalespulse.com/blog/crm-for-electronics-distributors"/>
+  </url>
+  <url>
+    <loc>https://aisalespulse.com/blog/manage-sales-reps-on-whatsapp</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aisalespulse.com/blog/manage-sales-reps-on-whatsapp"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://aisalespulse.com/es/blog/gestionar-vendedores-por-whatsapp"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aisalespulse.com/blog/manage-sales-reps-on-whatsapp"/>
+  </url>
+  <url>
+    <loc>https://aisalespulse.com/es/blog/gestionar-vendedores-por-whatsapp</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aisalespulse.com/blog/manage-sales-reps-on-whatsapp"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://aisalespulse.com/es/blog/gestionar-vendedores-por-whatsapp"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aisalespulse.com/blog/manage-sales-reps-on-whatsapp"/>
   </url>
   <url>
     <loc>https://aisalespulse.com/blog/manage-sales-on-whatsapp</loc>
