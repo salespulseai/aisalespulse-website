@@ -130,6 +130,14 @@ section{padding:84px 0}
 .pcard{max-width:520px;margin:34px auto 0;background:#fff;border:1px solid rgba(255,255,255,.6);border-radius:22px;padding:36px 32px;box-shadow:0 20px 50px rgba(10,60,120,.22);text-align:left}
 .pcard .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sky);background:rgba(14,165,233,.12);padding:6px 12px;border-radius:999px}
 .pcard h3{font-size:24px;margin:16px 0 6px;color:var(--ink)}.pcard>p{color:var(--muted);margin-bottom:20px}
+.priceline{border:1px solid var(--line);background:var(--soft);border-radius:14px;padding:16px 18px;margin-bottom:20px}
+.priceline .strike{color:var(--muted);text-decoration:line-through;font-weight:600;font-size:17px;margin-right:6px}
+.priceline .big{font-size:34px;font-weight:800;color:var(--ink)}.priceline .per{color:var(--muted);font-weight:600}
+.priceline .pl-note{color:var(--muted);font-size:13px;margin:0 0 10px}
+.priceline ul{list-style:none;display:grid;gap:6px;margin:0;padding:0}
+.priceline li{font-size:14px;color:var(--ink);padding-left:22px;position:relative}
+.priceline li:before{content:"\2713";position:absolute;left:0;color:var(--sky);font-weight:800}
+.priceline li s{color:var(--muted)}
 .form-row{display:flex;flex-direction:column;gap:14px}
 .form-row label{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:5px;display:block}
 .form-row input{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:12px;font-size:15px;font-family:inherit;color:var(--ink)}
@@ -202,6 +210,17 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;
  <div class="center"><span class="eyebrow">Early access</span><h2 style="color:#fff">Get in early</h2></div>
  <div class="pcard">
   <span class="tag">Early access</span><h3>Be one of the first teams on Pulse</h3><p>We&rsquo;re onboarding a first group of distributors and wholesale teams. Tell us about your team and we&rsquo;ll get you set up.</p>
+  <div class="priceline">
+   <div><span class="strike">$129</span><span class="big">$99</span> <span class="per">per rep / month</span></div>
+   <p class="pl-note">Early-access price, locked in for the first teams.</p>
+   <ul>
+    <li>Everything in one price &mdash; the AI is included, no add-ons</li>
+    <li>Reads WhatsApp, email, and voice notes</li>
+    <li>Smart alerts with the message already written</li>
+    <li>Inventory, rebates, credit &amp; the whole admin panel</li>
+    <li>Setup &amp; onboarding: <s>$800</s> free for early teams</li>
+   </ul>
+  </div>
   <form id="leadform" class="form-row" novalidate>
    <div><label for="lf-name">Your name</label><input id="lf-name" name="name" type="text" autocomplete="name" required></div>
    <div><label for="lf-contact">Email or WhatsApp number</label><input id="lf-contact" name="contact" type="text" required></div>
