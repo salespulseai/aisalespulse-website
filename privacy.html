@@ -125,12 +125,12 @@
 <div class="header">
   <a href="https://aisalespulse.com" class="logo">PULSE</a>
   <h1>Privacy Policy</h1>
-  <p class="updated">Last Updated: August 11, 2026</p>
+  <p class="updated">Last Updated: September 24, 2026</p>
 </div>
 
 <div class="container">
 
-  <p>AI Sales Pulse ("<strong>AI Sales Pulse</strong>," "<strong>we</strong>," "<strong>us</strong>," or "<strong>our</strong>") operates the Pulse sales assistant platform (the "<strong>Service</strong>"). This Privacy Policy explains what personal data we collect, why we collect it, how we protect it, and what rights you have.</p>
+  <p>Sales Pulse AI, LLC, doing business as AI Sales Pulse ("<strong>AI Sales Pulse</strong>," "<strong>we</strong>," "<strong>us</strong>," or "<strong>our</strong>") operates the Pulse sales assistant platform (the "<strong>Service</strong>"). This Privacy Policy explains what personal data we collect, why we collect it, how we protect it, and what rights you have.</p>
 
   <div class="highlight-box">
     <p><strong>Our Core Principle:</strong> Your business data belongs to you. We collect only what is necessary to deliver the Service, we never sell your data, and you can export or delete your data at any time.</p>
@@ -250,12 +250,22 @@
       <tr>
         <td><strong>BGATE / ERP Systems</strong></td>
         <td>Customer &amp; product data sync (opt-in)</td>
-        <td>API credentials, salesperson code. Syncs customer, product, and inventory data from your ERP (BGATE, SAP Business One, Oracle NetSuite, Epicor Prophet 21, Microsoft Dynamics 365, Acumatica). Only activated when you configure your ERP connection.</td>
+        <td>API credentials, salesperson code. Syncs customer, product, and inventory data from your ERP (currently BGATE; other ERP connections are built on request). Only activated when you configure your ERP connection.</td>
       </tr>
       <tr>
         <td><strong>Intuit (QuickBooks Online)</strong></td>
         <td>Accounting/ERP data sync (opt-in)</td>
         <td>Authorized by you through Intuit's OAuth 2.0 consent screen; we never see your Intuit password. Access and refresh tokens are <strong>encrypted at rest</strong>. Pulse pulls customers, invoices, and products/items from your QuickBooks company file into your tenant on a scheduled basis. Disconnecting from Settings invalidates the stored tokens and stops all further access.</td>
+      </tr>
+      <tr>
+        <td><strong>Voyage AI</strong></td>
+        <td>Search by meaning (semantic search)</td>
+        <td>Text of business-linked messages is converted into search vectors so you can find conversations by meaning. Personal or ignored chats are never sent. Processed on our behalf, not used to train models.</td>
+      </tr>
+      <tr>
+        <td><strong>Groq / OpenAI (speech-to-text)</strong></td>
+        <td>Voice note transcription</td>
+        <td>Audio of WhatsApp voice notes that belong to a business conversation is sent to a speech-to-text provider to turn it into text. Voice notes in personal or unmatched chats are never downloaded or sent.</td>
       </tr>
       <tr>
         <td><strong>Google Fonts</strong></td>
@@ -265,7 +275,12 @@
       <tr>
         <td><strong>Railway</strong></td>
         <td>Application hosting</td>
-        <td>All application data is hosted on Railway's infrastructure. Railway provides the PostgreSQL database and compute environment.</td>
+        <td>All application data is hosted on Railway's infrastructure in the United States. Railway provides the PostgreSQL database and compute environment.</td>
+      </tr>
+      <tr>
+        <td><strong>Vercel</strong></td>
+        <td>Marketing website hosting</td>
+        <td>Standard request data (IP address, browser info) when you visit aisalespulse.com, and the details you submit in the early-access form, which are emailed to us through Resend.</td>
       </tr>
     </tbody>
   </table>
@@ -286,7 +301,7 @@
   <h3>Authentication &amp; Access Control</h3>
   <ul>
     <li><strong>Two-Factor Authentication (2FA):</strong> Optional email-based one-time codes with backup recovery codes (bcrypt-hashed).</li>
-    <li><strong>Session Management:</strong> 30-minute inactivity timeout, 8-hour absolute session limit. Sessions can be viewed and revoked from the Security settings page.</li>
+    <li><strong>Session Management:</strong> 60-minute inactivity timeout and an 8-hour absolute session limit; if you choose "Remember me" (and in the mobile apps), you stay signed in for up to 30 days. Sessions can be viewed and revoked from the Security settings page.</li>
     <li><strong>Brute Force Protection:</strong> Account lockout after 5 failed login attempts (15-minute cooldown). API rate limiting on all authentication endpoints.</li>
     <li><strong>Role-Based Access:</strong> Distinct role tiers (sales rep, admin, and CEO, the account creator's highest-privilege role) with strict permission boundaries. Sales reps see only the customers assigned to them.</li>
   </ul>
@@ -327,7 +342,7 @@
     <tbody>
       <tr><td>Account &amp; profile data</td><td>Until you delete your account</td></tr>
       <tr><td>Business data (customers, products, messages)</td><td>Until you delete your account or individual records</td></tr>
-      <tr><td>Session data</td><td>Automatically expired after 8 hours (30 min inactivity)</td></tr>
+      <tr><td>Session data</td><td>Automatically expired after 8 hours (60 min inactivity), or up to 30 days with "Remember me"</td></tr>
       <tr><td>2FA verification codes</td><td>Automatically deleted after 5 minutes</td></tr>
       <tr><td>Password reset tokens</td><td>Automatically expired after 1 hour</td></tr>
       <tr><td>Failed login attempts</td><td>Cleared after 15 minutes or on successful login</td></tr>
@@ -358,7 +373,7 @@
     <li><strong>No Sale of Personal Information:</strong> We do not sell, rent, or share personal information for cross-context behavioral advertising.</li>
   </ul>
 
-  <p>To exercise any of these rights, email us at <a href="mailto:hello@aisalespulse.com">hello@aisalespulse.com</a>.</p>
+  <p>To exercise any of these rights, email us at <a href="mailto:support@aisalespulse.com">support@aisalespulse.com</a>.</p>
 
   <!-- ────────────────────────────── -->
   <h2 id="cookies">8. Cookies &amp; Tracking</h2>
@@ -386,15 +401,17 @@
   <h2 id="contact">11. Contact Us</h2>
   <p>If you have any questions about this Privacy Policy or your data, please contact us:</p>
   <ul>
-    <li><strong>Email:</strong> <a href="mailto:hello@aisalespulse.com">hello@aisalespulse.com</a></li>
-    <li><strong>Company:</strong> AI Sales Pulse</li>
+    <li><strong>Email:</strong> <a href="mailto:support@aisalespulse.com">support@aisalespulse.com</a></li>
+    <li><strong>Company:</strong> Sales Pulse AI, LLC (doing business as AI Sales Pulse)</li>
+    <li><strong>Address:</strong> 300 Oakwood Lane, Hollywood, FL 33020, United States</li>
+    <li><strong>Phone:</strong> +1 (954) 807-9824</li>
     <li><strong>Website:</strong> <a href="https://aisalespulse.com">aisalespulse.com</a></li>
   </ul>
 
 </div>
 
 <div class="footer">
-  &copy; 2026 AI Sales Pulse. All rights reserved.
+  &copy; 2026 Sales Pulse AI, LLC. All rights reserved.
 </div>
 
 </body>
