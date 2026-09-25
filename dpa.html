@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Processing Addendum, AI Sales Pulse</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: #1e293b;
+      background: #f8fafc;
+      line-height: 1.7;
+    }
+    .header {
+      background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+      padding: 60px 20px 40px;
+      text-align: center;
+      color: white;
+    }
+    .header a.logo {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: white;
+      text-decoration: none;
+    }
+    .header h1 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-top: 20px;
+    }
+    .header p.updated {
+      margin-top: 8px;
+      font-size: 14px;
+      opacity: 0.85;
+    }
+    .container {
+      max-width: 800px;
+      margin: -30px auto 60px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      padding: 48px;
+    }
+    h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #0ea5e9;
+      margin-top: 40px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    h3 {
+      font-size: 17px;
+      font-weight: 600;
+      color: #334155;
+      margin-top: 24px;
+      margin-bottom: 8px;
+    }
+    p, li {
+      font-size: 15px;
+      color: #475569;
+      margin-bottom: 10px;
+    }
+    ul, ol {
+      padding-left: 24px;
+      margin-bottom: 16px;
+    }
+    li { margin-bottom: 6px; }
+    .highlight-box {
+      background: #f0f9ff;
+      border-left: 4px solid #0ea5e9;
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 20px 0;
+    }
+    .highlight-box p { margin-bottom: 0; color: #0369a1; }
+    .warning-box {
+      background: #fef3c7;
+      border-left: 4px solid #f59e0b;
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 20px 0;
+    }
+    .warning-box p { margin-bottom: 0; color: #92400e; }
+    a { color: #0ea5e9; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .footer {
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+    .toc { margin: 20px 0 30px; }
+    .toc ol { counter-reset: section; list-style: none; padding-left: 0; }
+    .toc li { counter-increment: section; margin-bottom: 6px; }
+    .toc li::before {
+      content: counter(section) ". ";
+      font-weight: 600;
+      color: #0ea5e9;
+    }
+    .toc a { color: #334155; font-weight: 500; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px;
+      font-size: 14px;
+    }
+    th {
+      background: #f1f5f9;
+      text-align: left;
+      padding: 10px 14px;
+      font-weight: 600;
+      color: #334155;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #475569;
+    }
+    @media (max-width: 640px) {
+      .container { margin: -20px 12px 40px; padding: 28px 20px; }
+      .header h1 { font-size: 26px; }
+      h2 { font-size: 19px; }
+    }
+  @media(max-width:700px){table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}}</style>
+</head>
+<body>
+
+<div class="header">
+  <a href="https://aisalespulse.com" class="logo">PULSE</a>
+  <h1>Data Processing Addendum</h1>
+  <p class="updated">Last Updated: September 24, 2026</p>
+</div>
+
+<div class="container">
+
+  <p>This Data Processing Addendum ("<strong>DPA</strong>") is part of the <a href="https://aisalespulse.com/terms">Terms of Service</a> between Sales Pulse AI, LLC, a Florida limited liability company doing business as AI Sales Pulse ("<strong>we</strong>," "<strong>us</strong>," or the "<strong>Processor</strong>"), and the company that uses Pulse ("<strong>you</strong>" or the "<strong>Customer</strong>"). It applies whenever we process Personal Data on your behalf. You accept it when you accept the Terms. If you need a countersigned copy, email <a href="mailto:support@aisalespulse.com">support@aisalespulse.com</a>.</p>
+
+  <div class="highlight-box">
+    <p><strong>Plain-Language Summary:</strong> Your business data is yours. We only use it to run Pulse for you, we keep it secure, we tell you who else touches it, we tell you fast if something goes wrong, and we delete it when you leave.</p>
+  </div>
+
+  <nav class="toc">
+    <h3>Table of Contents</h3>
+    <ol>
+      <li><a href="#definitions">Definitions</a></li>
+      <li><a href="#roles">Roles and Scope</a></li>
+      <li><a href="#instructions">Processing Only on Your Instructions</a></li>
+      <li><a href="#confidentiality">Confidentiality of Our People</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#subprocessors">Subprocessors</a></li>
+      <li><a href="#requests">Help With Requests From Individuals</a></li>
+      <li><a href="#breach">Security Incidents</a></li>
+      <li><a href="#assistance">Other Assistance</a></li>
+      <li><a href="#deletion">Return and Deletion</a></li>
+      <li><a href="#audits">Information and Audits</a></li>
+      <li><a href="#transfers">International Transfers</a></li>
+      <li><a href="#us-laws">U.S. State Privacy Laws (CCPA)</a></li>
+      <li><a href="#your-duties">Your Responsibilities</a></li>
+      <li><a href="#liability">Liability and Precedence</a></li>
+      <li><a href="#annex1">Annex 1: Details of Processing</a></li>
+      <li><a href="#annex2">Annex 2: Security Measures</a></li>
+    </ol>
+  </nav>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="definitions">1. Definitions</h2>
+  <ul>
+    <li><strong>"Personal Data"</strong> means any information relating to an identified or identifiable person that we process on your behalf through the Service. It includes information about your employees and users, and about your customers, suppliers and their staff that appears in connected email, WhatsApp and ERP data.</li>
+    <li><strong>"Data Protection Laws"</strong> means all privacy and data protection laws that apply to the processing, including, where applicable, the EU General Data Protection Regulation ("<strong>GDPR</strong>"), the UK GDPR, and U.S. state laws such as the California Consumer Privacy Act as amended ("<strong>CCPA</strong>").</li>
+    <li><strong>"Subprocessor"</strong> means a third party we engage that processes Personal Data for us to provide the Service.</li>
+    <li><strong>"Security Incident"</strong> means a breach of security leading to the accidental or unlawful destruction, loss, alteration, unauthorized disclosure of, or access to, Personal Data.</li>
+    <li>"Controller," "processor," "data subject," "service provider," and "processing" have the meanings given in the applicable Data Protection Laws. Other capitalized terms have the meanings given in the Terms.</li>
+  </ul>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="roles">2. Roles and Scope</h2>
+  <p>For Personal Data in your business data (customers, contacts, connected messages, ERP records and anything else you bring into Pulse), you are the controller and we are your processor, or your "service provider" under the CCPA. For account, billing and security data we need to run our own business (for example, your users' login details), we act as an independent controller under our <a href="https://aisalespulse.com/privacy">Privacy Policy</a>. The details of the processing are in <a href="#annex1">Annex 1</a>.</p>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="instructions">3. Processing Only on Your Instructions</h2>
+  <p>We process Personal Data only to provide, secure and support the Service, and otherwise on your documented instructions. The Terms, this DPA, and the way you configure the Service (for example, which accounts you connect and which chats you exclude in Privacy Settings) are your instructions. If we believe an instruction breaks Data Protection Laws, we will tell you. If a law requires us to process Personal Data in another way, we will tell you first unless that law forbids it.</p>
+  <p>We do not sell Personal Data, and we do not use your business data to train AI models.</p>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="confidentiality">4. Confidentiality of Our People</h2>
+  <p>Only personnel who need access to provide or support the Service can access Personal Data, and they are bound by confidentiality obligations.</p>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="security">5. Security</h2>
+  <p>We keep appropriate technical and organizational measures in place to protect Personal Data, taking into account the nature of the data and the risks involved. The current measures are described in <a href="#annex2">Annex 2</a>. We may update them over time, but we will not reduce the overall level of protection.</p>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="subprocessors">6. Subprocessors</h2>
+  <ul>
+    <li>You give us general authorization to use Subprocessors. The current list, with what each one does, is in our <a href="https://aisalespulse.com/privacy#third-party">Privacy Policy</a>.</li>
+    <li>Before we add or replace a Subprocessor, we will update that list and notify you by email or in the app at least 15 days in advance. If you have a reasonable data protection objection, tell us within that period. We will work with you in good faith on an alternative. If we cannot find one, you may end the affected part of the Service and receive a refund of any prepaid fees for the unused period.</li>
+    <li>We put written terms in place with each Subprocessor that protect Personal Data at least as well as this DPA, and we remain responsible for their work.</li>
+    <li>Services you connect yourself (such as Meta's WhatsApp Business Platform, Microsoft 365, Intuit QuickBooks or your ERP) are your providers, not our Subprocessors. Their own terms govern them.</li>
+  </ul>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="requests">7. Help With Requests From Individuals</h2>
+  <p>If a person asks us directly to access, correct, delete or otherwise exercise their rights over Personal Data we hold for you, we will pass the request to you and will not respond ourselves except to direct them to you. Pulse lets you find, export, correct and delete data yourself. Where you cannot do something yourself, we will help you respond, as far as is reasonable.</p>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="breach">8. Security Incidents</h2>
+  <p>If we become aware of a Security Incident affecting your Personal Data, we will notify you without undue delay, and in any event within 72 hours after confirming it. We will tell you what we know about what happened, the data affected, and what we are doing about it, and we will update you as we learn more. We will take reasonable steps to contain the incident and reduce its effects. Notifying you is not an admission of fault.</p>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="assistance">9. Other Assistance</h2>
+  <p>Taking into account the information available to us, we will give you reasonable help with data protection impact assessments and consultations with regulators where the law requires them and they relate to our processing.</p>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="deletion">10. Return and Deletion</h2>
+  <p>You can export your data at any time in <strong>Settings &gt; Privacy &gt; Export My Data</strong>. When your account ends, we delete Personal Data within 30 days, unless you ask for an export first or the law requires us to keep it. Copies in backups are removed as those backups expire in the normal backup cycle, and until then they stay protected under this DPA and are not used for anything else.</p>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="audits">11. Information and Audits</h2>
+  <p>We will give you the information reasonably needed to show that we comply with this DPA, including written answers to security questionnaires, once a year or after a Security Incident. If that is not enough to meet a requirement of Data Protection Laws or a regulator, you may carry out an audit, with at least 30 days' written notice, during business hours, at your own cost, no more than once a year, and under confidentiality terms. The audit must not give access to other customers' data.</p>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="transfers">12. International Transfers</h2>
+  <p>Pulse is hosted in the United States. If Personal Data from the European Economic Area, the United Kingdom or Switzerland is transferred to us, the Standard Contractual Clauses approved by the European Commission (Decision 2021/914) apply and are incorporated into this DPA by reference: Module Two (controller to processor), with Clause 7 (docking) included, Option 2 (general authorization) in Clause 9 with the notice period in Section 6 above, the optional wording in Clause 11 left out, Clause 17 governed by the law of Ireland, and Clause 18 disputes before the courts of Ireland. Annexes I and II of those clauses are completed by Annex 1 and Annex 2 of this DPA. For the UK, the UK International Data Transfer Addendum applies alongside them, and for Switzerland they are read with the changes the Swiss law requires. If these clauses conflict with this DPA, the clauses control.</p>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="us-laws">13. U.S. State Privacy Laws (CCPA)</h2>
+  <p>Where the CCPA or a similar U.S. state law applies, we act as your service provider or processor. We will not:</p>
+  <ul>
+    <li>sell or share Personal Data (as those terms are defined in the CCPA);</li>
+    <li>keep, use or disclose it for any purpose other than the business purposes in the Terms and this DPA, or outside our direct business relationship with you;</li>
+    <li>combine it with personal information we receive from others or collect ourselves, except as the law permits for service providers.</li>
+  </ul>
+  <p>We will comply with the CCPA's obligations for service providers, give the same level of privacy protection it requires, and tell you if we can no longer meet them. You may take reasonable steps to stop and fix any unauthorized use.</p>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="your-duties">14. Your Responsibilities</h2>
+  <p>You are responsible for having a lawful basis for the processing, for giving any notices and getting any consents the law requires (including telling your employees and users that their business email and WhatsApp messages are processed by Pulse), and for the accuracy of the data you bring in. You will use the Privacy Settings to exclude personal chats and contacts that should not be processed.</p>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="liability">15. Liability and Precedence</h2>
+  <p>Each party's liability under this DPA is subject to the limitations and exclusions of liability in the Terms. If this DPA conflicts with the Terms on data protection, this DPA controls. This DPA lasts as long as we process Personal Data for you. We may update it to reflect changes in law or in our Subprocessors, with notice as described in the Terms, and we will not reduce the protection it gives your Personal Data without your agreement.</p>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="annex1">Annex 1: Details of Processing</h2>
+  <table>
+    <tbody>
+      <tr><th>Parties</th><td>Data exporter / controller: the Customer (contact details on its account). Data importer / processor: Sales Pulse AI, LLC, 300 Oakwood Lane, Hollywood, FL 33020, USA, <a href="mailto:support@aisalespulse.com">support@aisalespulse.com</a>.</td></tr>
+      <tr><th>Subject matter and purpose</th><td>Providing the Pulse sales assistant: organizing customers and conversations, reminders and follow-ups, AI summaries, insights and draft replies, search, reporting, and support.</td></tr>
+      <tr><th>Nature of processing</th><td>Collecting (through the integrations you connect), storing, organizing, analyzing (including with AI), searching, displaying, exporting and deleting.</td></tr>
+      <tr><th>Data subjects</th><td>Your employees and users; your customers, prospects and suppliers, and their staff and contacts.</td></tr>
+      <tr><th>Categories of Personal Data</th><td>Names, business contact details (email, phone, WhatsApp number, address), job details, the content and metadata of business email and WhatsApp messages (including attachments and voice notes), order, invoice and payment-terms history, notes, and usage and log data.</td></tr>
+      <tr><th>Sensitive data</th><td>Not intended. You should not use Pulse to process special categories of data. Personal chats can be excluded in Privacy Settings.</td></tr>
+      <tr><th>Frequency</th><td>Continuous, for as long as the integrations are connected.</td></tr>
+      <tr><th>Duration and retention</th><td>For the term of your subscription, then deleted as described in Section 10.</td></tr>
+      <tr><th>Subprocessors</th><td>As listed in the <a href="https://aisalespulse.com/privacy#third-party">Privacy Policy</a>, for the purposes stated there.</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ────────────────────────────── -->
+  <h2 id="annex2">Annex 2: Security Measures</h2>
+  <ul>
+    <li><strong>Encryption in transit:</strong> all traffic to the app and API uses HTTPS (TLS).</li>
+    <li><strong>Credential protection:</strong> passwords are stored as bcrypt hashes; integration tokens (email, WhatsApp, accounting) are encrypted in the database.</li>
+    <li><strong>Access control:</strong> role-based permissions inside each company, optional two-factor sign-in (on by default for company owners and admins), session timeouts, and lockout after repeated failed logins.</li>
+    <li><strong>Tenant isolation:</strong> every business record is tied to a company, and every query is filtered by the signed-in user's company.</li>
+    <li><strong>Least privilege:</strong> only personnel who need it can reach production systems.</li>
+    <li><strong>Logging:</strong> security events (sign-ins, 2FA and password changes, session revocations) are written to an audit log.</li>
+    <li><strong>Resilience:</strong> managed hosting in the United States, with point-in-time recovery and several independent backup copies.</li>
+    <li><strong>Application security:</strong> parameterized database queries, restricted cross-origin access, security headers, and dependency updates.</li>
+    <li><strong>Data minimization:</strong> Privacy Settings let you exclude personal chats and contacts; excluded conversations are not read by AI or search.</li>
+  </ul>
+
+  <p style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 14px; color: #94a3b8;">Questions about this DPA: <a href="mailto:support@aisalespulse.com">support@aisalespulse.com</a> · Sales Pulse AI, LLC, 300 Oakwood Lane, Hollywood, FL 33020, United States.</p>
+
+</div>
+
+<div class="footer">
+  &copy; 2026 Sales Pulse AI, LLC. All rights reserved.
+</div>
+
+</body>
+</html>
