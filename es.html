@@ -170,7 +170,7 @@ header{overflow-x:clip}
   background:rgba(8,21,37,.72);padding:6px 14px;border-radius:999px;white-space:nowrap}
 .pw{--s:.42;position:absolute;right:-205px;bottom:-34px;width:calc(600px*var(--s));height:calc(600px*var(--s));z-index:3;pointer-events:none;
   transform:translateX(110vw)}
-.pw.in{transition:transform 2.8s linear;transform:translateX(0)}
+.pw.in{transition:transform 4.2s linear;transform:translateX(0)}
 .pw.done{transition:none;transform:none}
 .pw-rig{position:absolute;left:0;top:0;width:600px;height:600px;transform:scale(var(--s));transform-origin:0 0}
 .pw-rig img{position:absolute;display:block;height:auto;transition:opacity .15s}
@@ -178,11 +178,11 @@ header{overflow-x:clip}
 .pw .eyebox{position:absolute;left:414px;bottom:380px;width:132px;height:170px}
 .pw .eyebox img{left:0;bottom:0;width:132px}
 .pw .alt{opacity:0}
-.pw.walking .fl{animation:stepA .56s ease-in-out infinite}
-.pw.walking .fr{animation:stepA .56s ease-in-out -.28s infinite}
-.pw.walking .pw-body{animation:wbob .28s ease-in-out infinite alternate}
-.pw.walking .hl{transform-origin:85% 60%;animation:swing .56s ease-in-out infinite alternate}
-.pw.walking .hr{transform-origin:15% 60%;animation:swing .56s ease-in-out -.28s infinite alternate}
+.pw.walking .fl{animation:stepA .72s ease-in-out infinite}
+.pw.walking .fr{animation:stepA .72s ease-in-out -.36s infinite}
+.pw.walking .pw-body{animation:wbob .36s ease-in-out infinite alternate}
+.pw.walking .hl{transform-origin:85% 60%;animation:swing .72s ease-in-out infinite alternate}
+.pw.walking .hr{transform-origin:15% 60%;animation:swing .72s ease-in-out -.36s infinite alternate}
 @keyframes stepA{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-26px) rotate(-7deg)}50%{transform:translateY(0) rotate(0)}}
 @keyframes wbob{from{transform:translateY(0)}to{transform:translateY(-12px)}}
 @keyframes swing{from{transform:rotate(-12deg)}to{transform:rotate(12deg)}}
@@ -358,7 +358,7 @@ document.addEventListener('DOMContentLoaded',function(){
       setTimeout(function(){say.classList.add('show')},450);
       setTimeout(function(){pw.classList.add('pointing');play.classList.add('hot')},2300);
       setInterval(blink,5200);
-    },2850);
+    },4250);
   }
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();setTimeout(start,350)}},{threshold:.35});
