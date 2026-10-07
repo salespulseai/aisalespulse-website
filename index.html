@@ -352,16 +352,24 @@ document.addEventListener('DOMContentLoaded',function(){
   function finalState(){pw.classList.add('done','idle','pointing');say.classList.add('show');play.classList.add('hot')}
   if(seen||reduce){finalState();setInterval(blink,5200);return;}
   function start(){
+    // Start JUST past the screen's right edge (not 110vw away), so he is on
+    // screen at once; walk at a steady ~200px/s so the steps stay slow.
+    pw.style.transition='none';pw.style.transform='none';
+    var r=pw.getBoundingClientRect(),dist=Math.max(80,window.innerWidth-r.left+10);
+    var dur=Math.min(3.2,Math.max(1.4,dist/200));
+    pw.style.transform='translateX('+dist+'px)';
     pw.classList.add('walking');
-    requestAnimationFrame(function(){requestAnimationFrame(function(){pw.classList.add('in')})});
+    requestAnimationFrame(function(){requestAnimationFrame(function(){
+      pw.style.transition='transform '+dur+'s linear';pw.style.transform='translateX(0)';
+    })});
     setTimeout(function(){pw.classList.remove('walking');pw.classList.add('idle');blink();
-      setTimeout(function(){say.classList.add('show')},450);
-      setTimeout(function(){pw.classList.add('pointing');play.classList.add('hot')},2300);
+      setTimeout(function(){say.classList.add('show')},200);
+      setTimeout(function(){pw.classList.add('pointing');play.classList.add('hot')},1400);
       setInterval(blink,5200);
-    },4250);
+    },dur*1000+60);
   }
   if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();setTimeout(start,350)}},{threshold:.35});
+    var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();setTimeout(start,100)}},{threshold:.1});
     io.observe(box);
   }else{setTimeout(start,600)}
 })();
